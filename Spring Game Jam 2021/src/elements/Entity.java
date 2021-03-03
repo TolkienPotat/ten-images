@@ -4,7 +4,6 @@ import java.awt.Rectangle;
 
 import rendering.Renderer;
 import rendering.Texture;
-import window.Window;
 
 public class Entity {
 
