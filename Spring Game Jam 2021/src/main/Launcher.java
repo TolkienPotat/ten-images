@@ -1,6 +1,6 @@
 package main;
 
-import main.Game;
+import states.Test;
 
 public class Launcher {
 
