@@ -79,12 +79,12 @@ public class Map {
 		
 	}
 
-	public void render(Player player, Renderer renderer) {
+	public void render(Camera c, Renderer renderer) {
 		for (int i = 0; i < xTiles; i++) {
 			for (int j = 0; j < yTiles; j++) {
 				
-				tiles[i][j].x = tiles[i][j].xInGame - (player.inGameX);
-				tiles[i][j].y = tiles[i][j].yInGame - (player.inGameY);
+				tiles[i][j].x = tiles[i][j].xInGame - (c.x);
+				tiles[i][j].y = tiles[i][j].yInGame - (c.y);
 				
 				
 				tiles[i][j].r.setBounds(tiles[i][j].xInGame, tiles[i][j].yInGame, tileWidth*scale, tileHeight*scale);

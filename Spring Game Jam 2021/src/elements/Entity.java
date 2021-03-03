@@ -13,7 +13,7 @@ public class Entity {
 	
 	public int inGameX, inGameY;
 	
-	public int velocity;
+	public int Xvelocity, Yvelocity;
 	
 	Rectangle screenRect;
 	Rectangle gameRect;

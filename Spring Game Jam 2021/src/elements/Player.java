@@ -27,7 +27,10 @@ public class Player extends Entity{
 		
 	}
 	
-	public void tick() {
+	public void tick(Camera camera) {
+		
+		x = inGameX - camera.x;
+		y = inGameY - camera.y;
 		
 	}
 	
