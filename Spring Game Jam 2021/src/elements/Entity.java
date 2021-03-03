@@ -14,7 +14,11 @@ public class Entity {
 	
 	public int inGameX, inGameY;
 	
+
 	public int velX, velY;
+
+	
+
 	
 	Rectangle screenRect;
 	Rectangle gameRect;

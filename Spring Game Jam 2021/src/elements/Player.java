@@ -27,8 +27,17 @@ public class Player extends Entity {
 
 	}
 
-	public void tick() {
+
+	public void tick(Camera camera) {
 		move();
+    x = inGameX - camera.x;
+		y = inGameY - camera.y;
+
+	
+	
+		
+		
+
 	}
 	
 	public void input(Window window) {
