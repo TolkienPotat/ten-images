@@ -9,7 +9,7 @@ import window.Window;
 
 public class Player extends Entity {
 	
-	boolean[] keys = new boolean[512];
+	int maxVelocity = 6;
 
 	public Player(Texture t) {
 
@@ -30,7 +30,7 @@ public class Player extends Entity {
 
 	public void tick(Camera camera) {
 		move();
-    x = inGameX - camera.x;
+		x = inGameX - camera.x;
 		y = inGameY - camera.y;
 
 	
@@ -42,35 +42,24 @@ public class Player extends Entity {
 	
 	public void input(Window window) {
 		if(window.isKeyPressed(GLFW_KEY_W)) {
-			keys[GLFW_KEY_W] = true;
-		} else keys[GLFW_KEY_W] = false;
+			if (velY < maxVelocity) velY++;
+		} 
 		
 		if(window.isKeyPressed(GLFW_KEY_A)) {
-			keys[GLFW_KEY_A] = true;
-		} else keys[GLFW_KEY_A] = false;
+			if (velX > -maxVelocity)velX--;
+		} 
 		
 		if(window.isKeyPressed(GLFW_KEY_S)) {
-			keys[GLFW_KEY_S] = true;
-		} else keys[GLFW_KEY_S] = false;
+			if (velY > -maxVelocity) velY--;
+		} 
 		
 		if(window.isKeyPressed(GLFW_KEY_D)) {
-			keys[GLFW_KEY_D] = true;
-		} else keys[GLFW_KEY_D] = false;
+			if (velX < maxVelocity) velX++;
+		} 
 	}
 
 	public void move() {
-		if(keys[GLFW_KEY_W]) {
-			velY++;
-		}
-		if(keys[GLFW_KEY_S]) {
-			velY--;
-		}
-		if(keys[GLFW_KEY_A]) {
-			velX--;
-		}
-		if(keys[GLFW_KEY_D]) {
-			velX++;
-		}
+		
 		
 		if (velX > 0) {
 			velX -= 0.1;
