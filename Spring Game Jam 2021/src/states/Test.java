@@ -1,5 +1,8 @@
 package states;
 
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
+
+import elements.Camera;
 import elements.Map;
 import elements.Player;
 import main.Launcher;
@@ -7,14 +10,13 @@ import rendering.Renderer;
 import rendering.Texture;
 import window.Window;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
-
 public class Test implements State {
 
+	public Camera camera;
+	
 	@Override
 	public void render(Renderer r) {
-		// TODO Auto-generated method stub
-		map.render(player, r);
+		map.render(camera, r);
 		player.render(r);
 	}
 
@@ -23,21 +25,19 @@ public class Test implements State {
 	
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
 		map = new Map();
         map.loadMapFile("DefaultResources/Files/test-map.map", 30, 30);
-        player = new Player(Texture.loadTexture("DefaultResources/Images/Pllayer.png"));
+        player = new Player(Texture.loadTexture("DefaultResources/Images/backflip.png"));
+        camera = new Camera(0, 0);
 	}
 
 	@Override
 	public void exit() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void input(Window window) {
-		// TODO Auto-generated method stub
 		if (window.isKeyPressed(GLFW_KEY_ESCAPE)) {
             Launcher.g.shouldExit = true;
         }
@@ -47,8 +47,7 @@ public class Test implements State {
 
 	@Override
 	public void tick() {
-		// TODO Auto-generated method stub
-		player.tick();
+		player.tick(camera);
 	}
 
 }

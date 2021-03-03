@@ -9,9 +9,14 @@ import window.Window;
 
 public class Player extends Entity {
 
-	boolean[] keys = new boolean[512];
+
+	
 	float slowdown = 0.03f;
 	float acceleration = 0.5f;
+
+	
+	int maxVelocity = 6;
+
 
 	public Player(Texture t) {
 
@@ -43,26 +48,24 @@ public class Player extends Entity {
 	}
 
 	public void input(Window window) {
-		if (window.isKeyPressed(GLFW_KEY_W)) {
-			keys[GLFW_KEY_W] = true;
-		} else
-			keys[GLFW_KEY_W] = false;
 
-		if (window.isKeyPressed(GLFW_KEY_A)) {
-			keys[GLFW_KEY_A] = true;
-		} else
-			keys[GLFW_KEY_A] = false;
-
-		if (window.isKeyPressed(GLFW_KEY_S)) {
-			keys[GLFW_KEY_S] = true;
-		} else
-			keys[GLFW_KEY_S] = false;
-
-		if (window.isKeyPressed(GLFW_KEY_D)) {
-			keys[GLFW_KEY_D] = true;
-		} else
-			keys[GLFW_KEY_D] = false;
+		if(window.isKeyPressed(GLFW_KEY_W)) {
+			if (velY < maxVelocity) velY++;
+		} 
+		
+		if(window.isKeyPressed(GLFW_KEY_A)) {
+			if (velX > -maxVelocity)velX--;
+		} 
+		
+		if(window.isKeyPressed(GLFW_KEY_S)) {
+			if (velY > -maxVelocity) velY--;
+		} 
+		
+		if(window.isKeyPressed(GLFW_KEY_D)) {
+			if (velX < maxVelocity) velX++;
+		} 
 	}
+	
 
 	public void move() {
 		if(velY > slowdown) {
@@ -77,26 +80,6 @@ public class Player extends Entity {
 			velX+=slowdown;
 		} else velX = 0;
 		
-		if(keys[GLFW_KEY_W]) {
-			if(velY < 6) {
-				velY+=acceleration;
-			}
-		}
-		if(keys[GLFW_KEY_S]) {
-			if(velY > -6) {
-				velY-=acceleration;
-			}
-		}
-		if(keys[GLFW_KEY_A]) {
-			if(velX > -6) {
-				velX-=acceleration;
-			}
-		}
-		if(keys[GLFW_KEY_D]) {
-			if(velX < 6) {
-				velX+=acceleration;
-			}
-		}
 		
 		inGameX += Math.ceil(velX);
 		inGameY += Math.ceil(velY);
