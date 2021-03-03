@@ -1,6 +1,7 @@
 package main;
 
 import main.Game;
+import states.Test;
 
 public class Launcher {
 
@@ -9,7 +10,7 @@ public class Launcher {
 	public static void main(String[]args) {
 		g  = new Game();
 		g.initiate();
-//		g.addStates(new Test(), "test");
+		g.addStates(new Test(), "test");
 		g.changeStates("test");
 		g.run();
 		g.exit();

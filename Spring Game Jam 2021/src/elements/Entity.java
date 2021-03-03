@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 
 import rendering.Renderer;
 import rendering.Texture;
+import window.Window;
 
 public class Entity {
 
@@ -13,7 +14,7 @@ public class Entity {
 	
 	public int inGameX, inGameY;
 	
-	public int velocity;
+	public int velX, velY;
 	
 	Rectangle screenRect;
 	Rectangle gameRect;
@@ -30,5 +31,4 @@ public class Entity {
 		r.end();
 		
 	}
-	
 }
