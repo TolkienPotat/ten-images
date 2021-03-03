@@ -8,8 +8,15 @@ import rendering.Texture;
 import window.Window;
 
 public class Player extends Entity {
+
+
+	
+	float slowdown = 0.03f;
+	float acceleration = 0.5f;
+
 	
 	int maxVelocity = 6;
+
 
 	public Player(Texture t) {
 
@@ -39,8 +46,9 @@ public class Player extends Entity {
 		
 
 	}
-	
+
 	public void input(Window window) {
+
 		if(window.isKeyPressed(GLFW_KEY_W)) {
 			if (velY < maxVelocity) velY++;
 		} 
@@ -57,23 +65,25 @@ public class Player extends Entity {
 			if (velX < maxVelocity) velX++;
 		} 
 	}
+	
 
 	public void move() {
+		if(velY > slowdown) {
+			velY-=slowdown;
+		} else if (velY < -slowdown) {
+			velY+=slowdown;
+		} else velY = 0;
+		
+		if(velX > slowdown) {
+			velX-=slowdown;
+		} else if (velX < -slowdown) {
+			velX+=slowdown;
+		} else velX = 0;
 		
 		
-		if (velX > 0) {
-			velX -= 0.1;
-		} else if (velX < 0) {
-			velX += 0.1;
-		}
-
-		if (velY > 0) {
-			velY -= 0.1;
-		} else if (velY < 0) {
-			velY += 0.1;
-		}
+		inGameX += Math.ceil(velX);
+		inGameY += Math.ceil(velY);
 		
-		inGameX += velX;
-		inGameY += velY;
+		
 	}
 }
