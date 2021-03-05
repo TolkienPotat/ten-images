@@ -61,16 +61,16 @@ public class Test implements State {
 		
 		if (player.x  >= 1920 - player.t.getWidth()) {
 			camera.moveRight();
-			player.inGameX+= player.t.getWidth() + 5;
+			player.velX = 8;
 		} else if (player.x  <= 0) {
 			camera.moveLeft();
-			player.inGameX -= player.t.getWidth() - 5;
+			player.velX = -8;
 		} else if (player.y  >= 1080 - player.t.getHeight()) {
 			camera.moveUp();
-			player.inGameY+= player.t.getHeight() + 5;
+			player.velY = 10;
 		} else if (player.y  <= 0) {
 			camera.moveDown();
-			player.inGameY-= player.t.getHeight() - 5;
+			player.velY = -10;
 		}
 	}
 
