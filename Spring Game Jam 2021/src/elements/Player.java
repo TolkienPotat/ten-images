@@ -37,19 +37,18 @@ public class Player extends Entity {
 
 		screenRect = new Rectangle(x, y, x + t.getWidth(), y + t.getHeight());
 
-		gameRect = new Rectangle(inGameX, inGameY, inGameX + t.getWidth(), inGameY + t.getHeight());
+		gameRect = new Rectangle(inGameX, inGameY, t.getWidth(), t.getHeight());
 
 	}
 
 
-	public void tick(Camera camera) {
-		move();
+	public void tick(Camera camera, Map map) {
+		gameRect.setBounds(inGameX, inGameY, t.getWidth(), t.getHeight());
+		move(map);
 		x = inGameX - camera.x;
 		y = inGameY - camera.y;
 
 	
-	
-		
 		
 
 	}
@@ -82,7 +81,7 @@ public class Player extends Entity {
 	}
 	
 
-	public void move() {
+	public void move(Map map) {
 		if(velY > slowdown) {
 			velY-=slowdown;
 		} else if (velY < -slowdown) {
@@ -96,8 +95,42 @@ public class Player extends Entity {
 		} else velX = 0;
 		
 		
-		inGameX += Math.ceil(velX);
-		inGameY += Math.ceil(velY);
+
+		
+		
+		if (velX == 0 && velY == 0) {
+			return;
+		}
+		
+		gameRect.y += Math.ceil(velY);
+		
+		try {
+			
+		if (!(map.tiles[Math.floorDiv((int) (gameRect.getX() + gameRect.getWidth()),map.scaledTileSize)][Math.floorDiv((int) (gameRect.getY() + gameRect.getHeight()), map.scaledTileSize)].id == 3) 
+		&& !(map.tiles[Math.floorDiv((int) (gameRect.getX()),map.scaledTileSize)][Math.floorDiv((int) (gameRect.getY() + gameRect.getHeight()), map.scaledTileSize)].id == 3) 
+		&& !(map.tiles[Math.floorDiv((int) (gameRect.getX() + gameRect.getWidth()),map.scaledTileSize)][Math.floorDiv((int) (gameRect.getY()), map.scaledTileSize)].id == 3)
+		&& !(map.tiles[Math.floorDiv((int) (gameRect.getX()),map.scaledTileSize)][Math.floorDiv((int) (gameRect.getY()), map.scaledTileSize)].id == 3) ) {
+			inGameY += Math.ceil(velY);
+
+		} else {
+			velY = 0;
+			gameRect.y -= Math.ceil(velY);
+		}
+		} catch (ArrayIndexOutOfBoundsException e) {gameRect.y -= Math.ceil(velY); velY = 0; e.printStackTrace();;}
+		gameRect.x += Math.ceil(velX);
+		
+		try {
+		if (!(map.tiles[Math.floorDiv((int) (gameRect.getX() + gameRect.getWidth()),map.scaledTileSize)][Math.floorDiv((int) (gameRect.getY() + gameRect.getHeight()), map.scaledTileSize)].id == 3) 
+		&& !(map.tiles[Math.floorDiv((int) (gameRect.getX()),map.scaledTileSize)][Math.floorDiv((int) (gameRect.getY() + gameRect.getHeight()), map.scaledTileSize)].id == 3) 
+		&& !(map.tiles[Math.floorDiv((int) (gameRect.getX() + gameRect.getWidth()),map.scaledTileSize)][Math.floorDiv((int) (gameRect.getY()), map.scaledTileSize)].id == 3)
+		&& !(map.tiles[Math.floorDiv((int) (gameRect.getX()),map.scaledTileSize)][Math.floorDiv((int) (gameRect.getY()), map.scaledTileSize)].id == 3) ) {
+
+			inGameX += Math.ceil(velX);
+		} else {
+			velX = 0;
+			gameRect.x -= Math.ceil(velX);
+		}
+		} catch (ArrayIndexOutOfBoundsException e) {gameRect.x -= Math.ceil(velX); velX = 0;}
 		
 		
 	}
