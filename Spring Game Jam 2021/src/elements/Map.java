@@ -20,6 +20,8 @@ public class Map {
 	
 	int scale = 4;
 
+	public int scaledTileSize;
+
 	public Map() {
 
 		texture = new Texture[16];
@@ -107,6 +109,8 @@ public class Map {
 		
 		tileWidth = texture[0].getWidth();
 		tileHeight = texture[0].getHeight();
+		
+		scaledTileSize = texture[0].getWidth() * scale;
 		
 	}
 

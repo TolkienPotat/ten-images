@@ -52,23 +52,23 @@ public class Test implements State {
 
 	@Override
 	public void tick() {
-		player.tick(camera);
+		player.tick(camera, map);
 		if (camera.moving) {
 			camera.move();
 			return;
 		}
 		
 		
-		if (player.x  >= 1920 - player.t.getWidth()) {
+		if (player.x  >= 1920 - player.t.getWidth() +1) {
 			camera.moveRight();
 			player.velX = 8;
-		} else if (player.x  <= 0) {
+		} else if (player.x  <= 0 - 1) {
 			camera.moveLeft();
 			player.velX = -8;
-		} else if (player.y  >= 1080 - player.t.getHeight()) {
+		} else if (player.y  >= 1080 - player.t.getHeight() + 1) {
 			camera.moveUp();
 			player.velY = 10;
-		} else if (player.y  <= 0) {
+		} else if (player.y  <= 0 - 1) {
 			camera.moveDown();
 			player.velY = -10;
 		}
