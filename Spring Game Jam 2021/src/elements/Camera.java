@@ -10,7 +10,7 @@ public class Camera {
 	public int moveDirection = 0;
 
 	public int prevY, prevX;
-	private int movespeed = 20;
+	private int movespeed = 15;
 
 	public Camera(int x, int y) {
 
