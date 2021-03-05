@@ -1,9 +1,14 @@
 package elements;
 
-import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_A;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_D;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_S;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
 
+import java.awt.Color;
 import java.awt.Rectangle;
 
+import rendering.Renderer;
 import rendering.Texture;
 import window.Window;
 
@@ -47,6 +52,14 @@ public class Player extends Entity {
 		
 		
 
+	}
+	
+	@Override
+	public void render(Renderer r) {
+		r.begin();
+		t.bind();
+		Renderer.drawTextureRegion(x, y, x+t.getWidth(), y+t.getHeight(), 0, 0.5f, 0.5f, 1f, new Color(1, 1, 1), inGameX, inGameY);
+		r.end();
 	}
 
 	public void input(Window window) {
