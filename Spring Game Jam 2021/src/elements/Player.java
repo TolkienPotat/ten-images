@@ -116,7 +116,7 @@ public class Player extends Entity {
 			velY = 0;
 			gameRect.y -= Math.ceil(velY);
 		}
-		} catch (ArrayIndexOutOfBoundsException e) {gameRect.y -= Math.ceil(velY); velY = 0; e.printStackTrace();;}
+		} catch (ArrayIndexOutOfBoundsException e) {gameRect.y -= Math.ceil(velY); velY = 0; }
 		gameRect.x += Math.ceil(velX);
 		
 		try {
