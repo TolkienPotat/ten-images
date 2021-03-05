@@ -7,7 +7,7 @@ import rendering.Texture;
 
 public class Entity {
 
-	Texture t;
+	public Texture t;
 	
 	public int x, y;
 	

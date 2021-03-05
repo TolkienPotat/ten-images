@@ -11,11 +11,13 @@ public class Player extends Entity {
 
 
 	
-	float slowdown = 0.03f;
+	float slowdown = 0.3f;
 	float acceleration = 0.5f;
 
 	
 	int maxVelocity = 6;
+	
+	boolean hasMovedSinceCamera = true;
 
 
 	public Player(Texture t) {
