@@ -15,7 +15,7 @@ public class Player extends Entity {
 	float acceleration = 0.5f;
 
 	
-	int mavelX = 6;
+	int maxVelocity = 6;
 	
 	boolean hasMovedSinceCamera = true;
 
@@ -51,19 +51,19 @@ public class Player extends Entity {
 	public void input(Window window) {
 
 		if(window.isKeyPressed(GLFW_KEY_W)) {
-			if (velY < mavelX) velY++;
+			if (velY < maxVelocity) velY++;
 		} 
 		
 		if(window.isKeyPressed(GLFW_KEY_A)) {
-			if (velX > -mavelX)velX--;
+			if (velX > -maxVelocity)velX--;
 		} 
 		
 		if(window.isKeyPressed(GLFW_KEY_S)) {
-			if (velY > -mavelX) velY--;
+			if (velY > -maxVelocity) velY--;
 		} 
 		
 		if(window.isKeyPressed(GLFW_KEY_D)) {
-			if (velX < mavelX) velX++;
+			if (velX < maxVelocity) velX++;
 		} 
 	}
 	
