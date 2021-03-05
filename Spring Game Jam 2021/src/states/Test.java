@@ -23,12 +23,17 @@ public class Test implements State {
 	private Map map;
 	private Player player;
 	
+	
+	
 	@Override
 	public void init() {
 		map = new Map();
         map.loadMapFile("DefaultResources/Files/test-map.map", 30, 30);
         player = new Player(Texture.loadTexture("DefaultResources/Images/backflip.png"));
         camera = new Camera(0, 0);
+        
+        player.inGameX = 1920/2;
+        player.inGameY = 1080/2;
 	}
 
 	@Override
@@ -48,6 +53,25 @@ public class Test implements State {
 	@Override
 	public void tick() {
 		player.tick(camera);
+		if (camera.moving) {
+			camera.move();
+			return;
+		}
+		
+		
+		if (player.x  >= 1920 - player.t.getWidth()) {
+			camera.moveRight();
+			player.inGameX+= player.t.getWidth() + 5;
+		} else if (player.x  <= 0) {
+			camera.moveLeft();
+			player.inGameX -= player.t.getWidth() - 5;
+		} else if (player.y  >= 1080 - player.t.getHeight()) {
+			camera.moveUp();
+			player.inGameY+= player.t.getHeight() + 5;
+		} else if (player.y  <= 0) {
+			camera.moveDown();
+			player.inGameY-= player.t.getHeight() - 5;
+		}
 	}
 
 }
