@@ -29,7 +29,7 @@ public class Test implements State {
 	public void init() {
 		map = new Map();
         map.loadMapFile("DefaultResources/Files/test-map.map", 30, 30);
-        player = new Player(Texture.loadTexture("DefaultResources/Images/Pllayer.png"));
+        player = new Player(Texture.loadTexture("DefaultResources/Images/pLAYER.png"));
         camera = new Camera(0, 0);
         
         player.inGameX = 1920/2;
