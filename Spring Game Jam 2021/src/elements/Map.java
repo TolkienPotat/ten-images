@@ -10,7 +10,7 @@ import rendering.Texture;
 
 public class Map {
 
-	public int tileWidth, tileHeight;
+	public int tileSize;
 	
 	int xTiles, yTiles;
 
@@ -21,11 +21,19 @@ public class Map {
 	int scale = 4;
 
 	public int scaledTileSize;
+	
+	public int wallIDPos = 8;
+	
+	
+	
+	
 
 	public Map() {
 
 		texture = new Texture[16];
 		setTextures();
+		
+		
 		
 	}
 
@@ -46,8 +54,8 @@ public class Map {
 				for (int m = 0; m < maxX; m++) {
 					tiles[m][l] = new Tile();
 					tiles[m][l].id = sc.nextInt();
-					tiles[m][l].xInGame = l*tileHeight*scale;
-					tiles[m][l].yInGame = m*tileHeight*scale;
+					tiles[m][l].xInGame = m*tileSize*scale;
+					tiles[m][l].yInGame = l*tileSize*scale;
 
 				}
 
@@ -72,8 +80,8 @@ public class Map {
 			for (int m = 0; m < maxX; m++) {
 				tiles[m][l] = new Tile();
 				tiles[m][l].id = sc.nextInt();
-				tiles[m][l].xInGame = l*tileHeight*scale;
-				tiles[m][l].yInGame = m*tileHeight*scale;
+				tiles[m][l].xInGame = m*tileSize*scale;
+				tiles[m][l].yInGame = l*tileSize*scale;
 			}
 
 		}
@@ -88,27 +96,36 @@ public class Map {
 				tiles[i][j].x = tiles[i][j].xInGame - (c.x);
 				tiles[i][j].y = tiles[i][j].yInGame - (c.y);
 				
+				if ((tiles[i][j].x > 3840 || tiles[i][j].x < -1920) || (tiles[i][j].y > 2160 || tiles[i][j].y < -1080)) {
+					continue;
+				}
 				
-				tiles[i][j].r.setBounds(tiles[i][j].xInGame, tiles[i][j].yInGame, tileWidth*scale, tileHeight*scale);
+				
+				tiles[i][j].r.setBounds(tiles[i][j].xInGame, tiles[i][j].yInGame, tileSize*scale, tileSize*scale);
 				
 				renderer.begin();
 				texture[tiles[i][j].id].bind();
-//				renderer.drawTexture(texture[tiles[i][j].id],tiles[i][j].x,tiles[i][j].y, tiles[i][j].xInGame, tiles[i][j].yInGame);
-				renderer.drawCustomTextureRegion(texture[tiles[i][j].id], tiles[i][j].x, tiles[i][j].y, 0, 0, tileWidth*scale, tileHeight*scale, new Color(1, 1, 1), tiles[i][j].xInGame, tiles[i][j].yInGame);
-				
+
+				renderer.drawCustomTextureRegion(texture[tiles[i][j].id], tiles[i][j].x, tiles[i][j].y, 0, 0, tileSize*scale, tileSize*scale, new Color(1, 1, 1), tiles[i][j].xInGame, tiles[i][j].yInGame);
 				renderer.end();
+				
+				
+				
 				
 				
 			}
 		}
 	}
 	
+	
+
 	public void setTextures() {
 
 		texture[0] = Texture.loadTexture("DefaultResources/Images/test-tile-1.png");
+		texture[8] = Texture.loadTexture("DefaultResources/Images/test-wall.png");
 		
-		tileWidth = texture[0].getWidth();
-		tileHeight = texture[0].getHeight();
+		tileSize = texture[0].getWidth();
+		
 		
 		scaledTileSize = texture[0].getWidth() * scale;
 		
