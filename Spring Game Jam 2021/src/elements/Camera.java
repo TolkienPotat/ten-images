@@ -13,6 +13,7 @@ public class Camera {
 
 	private int movespeed = 20;
 
+
 	public Camera(int x, int y) {
 
 		this.x = x;
@@ -82,23 +83,27 @@ public class Camera {
 
 		if (moveDirection == 1) {
 			y += movespeed;
-			if (y == prevY + 1080) {
+			if (y >= prevY + 1080) {
 				moving = false;
+				y = prevY + 1080;
 			}
 		} else if (moveDirection == 2) {
 			y -= movespeed;
-			if (y == prevY - 1080) {
+			if (y <= prevY - 1080) {
 				moving = false;
+				y = prevY - 1080;
 			}
 		} else if (moveDirection == 3) {
 			x += movespeed;
-			if (x == prevX + 1920) {
+			if (x >= prevX + 1920) {
 				moving = false;
+				x = prevX + 1920;
 			}
 		} else if (moveDirection == 4) {
 			x -= movespeed;
-			if (x == prevX - 1920) {
+			if (x <= prevX - 1920) {
 				moving = false;
+				x = prevX - 1920;
 			}
 		}
 
