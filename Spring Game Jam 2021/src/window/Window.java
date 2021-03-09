@@ -109,6 +109,10 @@ public class Window {
 		return glfwGetKey(id, keyCode) == GLFW_PRESS;
 	}
 	
+	public int isMouseDown(int keyCode) {
+		return glfwGetMouseButton(id, keyCode);
+	}
+	
 	public void setKCBs() {
 
 		input = new GLFWKeyCallback() {
@@ -123,21 +127,21 @@ public class Window {
 		GLFW.glfwSetMouseButtonCallback(id, minput = new GLFWMouseButtonCallback() {
 			public void invoke(long window, int button, int action, int mods) {
 
-				if (button == GLFW_MOUSE_BUTTON_LEFT) {
-					if (action == GLFW_PRESS) {
-
-					} else if (action == GLFW_RELEASE) {
-
-					}
-
-				} else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
-
-					if (action == GLFW_PRESS) {
-
-					} else if (action == GLFW_RELEASE) {
-
-					}
-				}
+//				if (button == GLFW_MOUSE_BUTTON_LEFT) {
+//					if (action == GLFW_PRESS) {
+//
+//					} else if (action == GLFW_RELEASE) {
+//
+//					}
+//
+//				} else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
+//
+//					if (action == GLFW_PRESS) {
+//
+//					} else if (action == GLFW_RELEASE) {
+//
+//					}
+//				}
 			}
 		});
 
