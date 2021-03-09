@@ -1,11 +1,18 @@
 package states;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
+import static org.lwjgl.glfw.GLFW.*;
+
+import java.awt.Point;
+import java.nio.DoubleBuffer;
+
+import org.lwjgl.BufferUtils;
+import org.lwjgl.glfw.GLFW;
 
 import elements.Camera;
 import elements.Map;
 import elements.Player;
 import main.Launcher;
+import objects.MapObjectHandler;
 import rendering.Renderer;
 import rendering.Texture;
 import window.Window;
@@ -14,15 +21,24 @@ public class Test implements State {
 
 	public Camera camera;
 	
-	@Override
-	public void render(Renderer r) {
-		map.render(camera, r);
-		player.render(r);
-	}
-
 	private Map map;
 	private Player player;
 	
+	private MapObjectHandler mObjHandler;
+	
+	Point cursor;
+	
+	int mouse = 0;
+	
+	
+	@Override
+	public void render(Renderer r) {
+		map.render(camera, r);
+		mObjHandler.Render(r, camera);
+		player.render(r);
+		
+	}
+
 	
 	
 	@Override
@@ -34,6 +50,9 @@ public class Test implements State {
         
         player.inGameX = 1920/2;
         player.inGameY = 1080/2;
+        
+        mObjHandler = new MapObjectHandler();
+        
 	}
 
 	@Override
@@ -47,16 +66,28 @@ public class Test implements State {
             Launcher.g.shouldExit = true;
         }
 		
+		mouse = window.isMouseDown(GLFW_MOUSE_BUTTON_1) + window.isMouseDown(GLFW_MOUSE_BUTTON_2)*2;
+		System.out.println(mouse);
+		
 		player.input(window);
+		
+		cursor = getCursor(window.id);
+		
 	}
 
 	@Override
 	public void tick() {
 		player.tick(camera, map);
+		
+		
+		
 		if (camera.moving) {
 			camera.move();
 			return;
 		}
+		mObjHandler.tick(cursor, camera, mouse);
+		
+		
 		
 		
 		if (player.x  >= 1920 - player.t.getWidth() +1) {
@@ -74,4 +105,20 @@ public class Test implements State {
 		}
 	}
 
+	public Point getCursor(long windowID) {
+		Point point = new Point();
+		DoubleBuffer xBuffer = BufferUtils.createDoubleBuffer(1);
+		DoubleBuffer yBuffer = BufferUtils.createDoubleBuffer(1);
+		GLFW.glfwGetCursorPos(windowID, xBuffer, yBuffer);
+		double x = xBuffer.get(0);
+		double y = yBuffer.get(0);
+
+		y = -y + 1080 - 1;
+
+		point.x = (int) x;
+		point.y = (int) y;
+		return point;
+
+	}
+	
 }
