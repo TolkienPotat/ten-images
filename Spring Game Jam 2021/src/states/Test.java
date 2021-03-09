@@ -67,7 +67,7 @@ public class Test implements State {
         }
 		
 		mouse = window.isMouseDown(GLFW_MOUSE_BUTTON_1) + window.isMouseDown(GLFW_MOUSE_BUTTON_2)*2;
-		System.out.println(mouse);
+		
 		
 		player.input(window);
 		

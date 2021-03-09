@@ -15,7 +15,7 @@ public class MapObjectChunk {
 	public MapObjectChunk(int x, int y) {
 		
 		mapObjects = new ArrayList<MapObject>();
-		mapObjects.add(new Tree(100, 100));
+		
 		
 		this.x = x;
 		this.y = y;
@@ -31,6 +31,7 @@ public class MapObjectChunk {
 			
 			if (mapObjects.get(i).tick(p, mouse) == -1) {
 				mapObjects.remove(i);
+				
 			}
 		}
 		

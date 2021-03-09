@@ -23,9 +23,11 @@ public class MapObjectHandler {
 				if (mapObjectChunks[i][j] == null) {
 					continue;
 				}
-				if (mapObjectChunks[i][j].x == c.x && mapObjectChunks[i][j].y == c.y)
-
+				if (mapObjectChunks[i][j].x == c.x && mapObjectChunks[i][j].y == c.y) {
+					cursorPos.x += mapObjectChunks[i][j].x;
+					cursorPos.y += mapObjectChunks[i][j].y;
 					mapObjectChunks[i][j].tick(cursorPos, mouse);
+				}
 			}
 		}
 

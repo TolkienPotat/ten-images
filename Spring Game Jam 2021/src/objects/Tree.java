@@ -37,11 +37,12 @@ public class Tree implements MapObject {
 	
 	public int tick(Point p, int mouse) {
 
-		
+	
 		
 		if (bounds.contains(p) && mouse == 1) {
 			
 			health--;
+			
 			
 		}
 		
