@@ -19,6 +19,10 @@ public class Player extends Entity {
 	float slowdown = 0.3f;
 	float acceleration = 0.5f;
 
+	float tWidth, tHeight;
+	int scale = 2;
+	
+	Color drawColor = new Color(1,1,1);
 	
 	int maxVelocity = 6;
 	
@@ -39,6 +43,8 @@ public class Player extends Entity {
 
 		gameRect = new Rectangle(inGameX, inGameY, t.getWidth(), t.getHeight());
 
+		tWidth = t.getWidth() * scale;
+		tHeight = t.getHeight() * scale;
 	}
 
 
@@ -57,7 +63,7 @@ public class Player extends Entity {
 	public void render(Renderer r) {
 		r.begin();
 		t.bind();
-		Renderer.drawTextureRegion(x, y, x+t.getWidth(), y+t.getHeight(), 0, 0.5f, 0.5f, 1f, new Color(1, 1, 1), inGameX, inGameY);
+		Renderer.drawTextureRegion(x, y, x+tWidth, y+tHeight, 0, 0.5f, 0.5f, 1f, drawColor, inGameX, inGameY);
 		r.end();
 	}
 
