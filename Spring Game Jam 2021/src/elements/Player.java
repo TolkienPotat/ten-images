@@ -20,6 +20,7 @@ public class Player extends Entity {
 	float acceleration = 0.5f;
 
 	int tWidth, tHeight;
+	
 	int scale = 1;
 	
 	int direction = 1;
