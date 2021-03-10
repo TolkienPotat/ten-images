@@ -19,8 +19,8 @@ public class Player extends Entity {
 	float slowdown = 0.3f;
 	float acceleration = 0.5f;
 
-	float tWidth, tHeight;
-	int scale = 2;
+	int tWidth, tHeight;
+	int scale = 1;
 	
 	Color drawColor = new Color(1,1,1);
 	
@@ -41,7 +41,7 @@ public class Player extends Entity {
 
 		screenRect = new Rectangle(x, y, x + t.getWidth(), y + t.getHeight());
 
-		gameRect = new Rectangle(inGameX, inGameY, t.getWidth(), t.getHeight());
+		gameRect = new Rectangle(inGameX, inGameY, tWidth, tHeight);
 
 		tWidth = t.getWidth() * scale;
 		tHeight = t.getHeight() * scale;
@@ -49,7 +49,7 @@ public class Player extends Entity {
 
 
 	public void tick(Camera camera, Map map) {
-		gameRect.setBounds(inGameX, inGameY, t.getWidth(), t.getHeight());
+		gameRect.setBounds(inGameX, inGameY, tWidth, tHeight);
 		move(map);
 		x = inGameX - camera.x;
 		y = inGameY - camera.y;

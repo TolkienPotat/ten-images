@@ -37,11 +37,12 @@ public class Tree implements MapObject {
 	
 	public int tick(Point p, int mouse) {
 
-		
+	
 		
 		if (bounds.contains(p) && mouse == 1) {
 			
 			health--;
+			
 			
 		}
 		
@@ -68,6 +69,14 @@ public class Tree implements MapObject {
 		r.drawCustomTextureRegion(texture, x, y, 0, 0, texture.getWidth() * scale, texture.getHeight() * scale,
 				new Color(1, 1, 1), inGameX, inGameY);
 		r.end();
+	}
+
+	@Override
+	public void setPos(int x, int y) {
+		
+		inGameX = x;
+		inGameY = y;
+		
 	}
 
 }

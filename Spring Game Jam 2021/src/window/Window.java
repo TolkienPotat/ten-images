@@ -97,12 +97,7 @@ public class Window {
 			}
 		});
 
-//				(window, width, height) -> {
-//			System.out.println("o");
-//		    Window.this.width = width;
-//		    Window.this.height = height;
-//		    Window.this.resized = true;
-//		});
+
 	}
 
 	public boolean isKeyPressed(int keyCode) {
@@ -127,21 +122,7 @@ public class Window {
 		GLFW.glfwSetMouseButtonCallback(id, minput = new GLFWMouseButtonCallback() {
 			public void invoke(long window, int button, int action, int mods) {
 
-//				if (button == GLFW_MOUSE_BUTTON_LEFT) {
-//					if (action == GLFW_PRESS) {
-//
-//					} else if (action == GLFW_RELEASE) {
-//
-//					}
-//
-//				} else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
-//
-//					if (action == GLFW_PRESS) {
-//
-//					} else if (action == GLFW_RELEASE) {
-//
-//					}
-//				}
+
 			}
 		});
 
