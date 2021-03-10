@@ -71,4 +71,12 @@ public class Tree implements MapObject {
 		r.end();
 	}
 
+	@Override
+	public void setPos(int x, int y) {
+		
+		inGameX = x;
+		inGameY = y;
+		
+	}
+
 }

@@ -25,4 +25,6 @@ public interface MapObject {
 
 	int tick(Point p, int mouse);
 	
+	public void setPos(int x, int y);
+	
 }

@@ -12,7 +12,7 @@ import elements.Camera;
 import elements.Map;
 import elements.Player;
 import main.Launcher;
-import objects.MapObjectHandler;
+import objects.Tree;
 import rendering.Renderer;
 import rendering.Texture;
 import window.Window;
@@ -24,9 +24,11 @@ public class Test implements State {
 	private Map map;
 	private Player player;
 	
-	private MapObjectHandler mObjHandler;
+	
 	
 	Point cursor;
+	
+	Point cursorInGame;
 	
 	int mouse = 0;
 	
@@ -34,7 +36,8 @@ public class Test implements State {
 	@Override
 	public void render(Renderer r) {
 		map.render(camera, r);
-		mObjHandler.Render(r, camera);
+
+		map.renderObjects(camera, r);
 		player.render(r);
 		
 	}
@@ -44,14 +47,14 @@ public class Test implements State {
 	@Override
 	public void init() {
 		map = new Map();
-        map.loadMapFile("DefaultResources/Files/test-map.map", 30, 480);
+        map.loadMapFile("DefaultResources/Files/test-map.map", 200, 200);
         player = new Player(Texture.loadTexture("DefaultResources/Images/GPlayer-Sheet.png"));
         camera = new Camera(0, 0);
         
         player.inGameX = 1920/2;
         player.inGameY = 1080/2;
-        
-        mObjHandler = new MapObjectHandler();
+        cursorInGame = new Point();
+
         
 	}
 
@@ -72,6 +75,7 @@ public class Test implements State {
 		player.input(window);
 		
 		cursor = getCursor(window.id);
+		cursorInGame.setLocation(cursor.x + camera.x, cursor.y + camera.y);
 		
 	}
 
@@ -85,10 +89,11 @@ public class Test implements State {
 			camera.move();
 			return;
 		}
-		mObjHandler.tick(cursor, camera, mouse);
+
 		
 		
-		
+		map.tickTiles(cursor, mouse);
+		map.addObject(new Tree(player.inGameX, player.inGameY), player.inGameX, player.inGameY);
 		
 		if (player.x  >= 1920 - player.t.getWidth() +1) {
 			camera.moveRight();
