@@ -20,7 +20,12 @@ public class Player extends Entity {
 	float acceleration = 0.5f;
 
 	int tWidth, tHeight;
+
 	int scale = 1;
+	
+	int direction = 1;
+	float tcX, tcY;
+
 	
 	Color drawColor = new Color(1,1,1);
 	
@@ -41,10 +46,11 @@ public class Player extends Entity {
 
 		screenRect = new Rectangle(x, y, x + t.getWidth(), y + t.getHeight());
 
-		gameRect = new Rectangle(inGameX, inGameY, tWidth, tHeight);
 
 		tWidth = t.getWidth() * scale;
 		tHeight = t.getHeight() * scale;
+		
+		gameRect = new Rectangle(inGameX, inGameY, tWidth, tHeight);
 	}
 
 
@@ -55,7 +61,24 @@ public class Player extends Entity {
 		y = inGameY - camera.y;
 
 	
-		
+		switch (direction) {
+		case 0 :
+			tcX = 0.5f;
+			tcY = 0;
+			break;
+		case 1 :
+			tcX = 0;
+			tcY = 0.5f;
+			break;
+		case 2 :
+			tcX = 0;
+			tcY = 0;
+			break;
+		case 3 :
+			tcX = 0.5f;
+			tcY = 0.5f;
+			break;
+		}
 
 	}
 	
@@ -63,7 +86,7 @@ public class Player extends Entity {
 	public void render(Renderer r) {
 		r.begin();
 		t.bind();
-		Renderer.drawTextureRegion(x, y, x+tWidth, y+tHeight, 0, 0.5f, 0.5f, 1f, drawColor, inGameX, inGameY);
+		Renderer.drawTextureRegion(x, y, x+tWidth, y+tHeight, tcX, tcY, tcX+0.5f, tcY+0.5f, drawColor, inGameX, inGameY);
 		r.end();
 	}
 
@@ -71,18 +94,22 @@ public class Player extends Entity {
 
 		if(window.isKeyPressed(GLFW_KEY_W)) {
 			if (velY < maxVelocity) velY++;
+			direction = 3;
 		} 
 		
 		if(window.isKeyPressed(GLFW_KEY_A)) {
 			if (velX > -maxVelocity)velX--;
+			direction = 2;
 		} 
 		
 		if(window.isKeyPressed(GLFW_KEY_S)) {
 			if (velY > -maxVelocity) velY--;
+			direction = 1;
 		} 
 		
 		if(window.isKeyPressed(GLFW_KEY_D)) {
 			if (velX < maxVelocity) velX++;
+			direction = 0;
 		} 
 	}
 	
@@ -144,7 +171,6 @@ public class Player extends Entity {
 			velX = 0;
 		}
 		} catch (ArrayIndexOutOfBoundsException e) {gameRect.x -= Math.ceil(velX); velX = 0;}
-		
 		
 	}
 }
