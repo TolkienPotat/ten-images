@@ -1,10 +1,12 @@
 package elements;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import objects.MapObject;
 import rendering.Renderer;
 import rendering.Texture;
 
@@ -116,7 +118,64 @@ public class Map {
 			}
 		}
 	}
+
+	public void tickTiles(Point mousePos, int mouseButtons) {
+		for (int i = 0; i < xTiles; i++) {
+			for (int j = 0; j < yTiles; j++) {
+				
+				
+				
+				if ((tiles[i][j].x > 3840 || tiles[i][j].x < -1920) || (tiles[i][j].y > 2160 || tiles[i][j].y < -1080)) {
+					continue;
+				}
+				
+				
+				tiles[i][j].tick(mousePos, mouseButtons);
+				
+				
+				
+				
+				
+				
+				
+			}
+		}
+	}
 	
+	
+	public void renderObjects(Camera c, Renderer renderer) {
+		for (int i = xTiles-1; i >= 0; i--) {
+			for (int j = yTiles-1; j >= 0; j--) {
+				
+				
+				
+				if ((tiles[i][j].x > 3840 || tiles[i][j].x < -1920) || (tiles[i][j].y > 2160 || tiles[i][j].y < -1080)) {
+					continue;
+				}
+				
+				
+				tiles[i][j].render(renderer, c);
+				
+				
+				
+				
+				
+				
+				
+			}
+		}
+	}
+	
+	public void addObject(MapObject m, int x, int y) {
+		
+		try {
+			tiles[Math.floorDiv(x, scaledTileSize)][Math.floorDiv(y, scaledTileSize)].object = m;
+			tiles[Math.floorDiv(x, scaledTileSize)][Math.floorDiv(y, scaledTileSize)].object.setPos(Math.floorDiv(x, scaledTileSize)*scaledTileSize, Math.floorDiv(y, scaledTileSize)*scaledTileSize);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			
+		}
+		
+	}
 	
 
 	public void setTextures() {
