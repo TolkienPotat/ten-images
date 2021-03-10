@@ -133,7 +133,7 @@ public class Player extends Entity {
 		} else velX = 0;
 		
 		
-
+		
 		
 		if (velX == 0 && velY == 0) {
 			return;
@@ -141,12 +141,19 @@ public class Player extends Entity {
 		
 		gameRect.y += Math.ceil(velY);
 		
+		
+		int rectX = (int) gameRect.getX();
+		int rectY = (int) gameRect.getY();
+		
+		
+		
+		
 		try {
 			
-		if (!(map.tiles[Math.floorDiv((int) (gameRect.getX() + gameRect.getWidth()),map.scaledTileSize)][Math.floorDiv((int) (gameRect.getY() + gameRect.getHeight()), map.scaledTileSize)].id >= map.wallIDPos) 
-		&& !(map.tiles[Math.floorDiv((int) (gameRect.getX()),map.scaledTileSize)][Math.floorDiv((int) (gameRect.getY() + gameRect.getHeight()), map.scaledTileSize)].id >= map.wallIDPos) 
-		&& !(map.tiles[Math.floorDiv((int) (gameRect.getX() + gameRect.getWidth()),map.scaledTileSize)][Math.floorDiv((int) (gameRect.getY()), map.scaledTileSize)].id >= map.wallIDPos)
-		&& !(map.tiles[Math.floorDiv((int) (gameRect.getX()),map.scaledTileSize)][Math.floorDiv((int) (gameRect.getY()), map.scaledTileSize)].id >= map.wallIDPos)) {
+		if (!(map.tiles[Math.floorDiv(rectX + tWidth, map.scaledTileSize)][Math.floorDiv(rectY + tHeight, map.scaledTileSize)].id >= map.wallIDPos) 
+		&& !(map.tiles[Math.floorDiv(rectX, map.scaledTileSize)][Math.floorDiv(rectY + tHeight, map.scaledTileSize)].id >= map.wallIDPos) 
+		&& !(map.tiles[Math.floorDiv(rectX + tWidth, map.scaledTileSize)][Math.floorDiv(rectY, map.scaledTileSize)].id >= map.wallIDPos)
+		&& !(map.tiles[Math.floorDiv(rectX, map.scaledTileSize)][Math.floorDiv(rectY, map.scaledTileSize)].id >= map.wallIDPos)) {
 			inGameY += Math.ceil(velY);
 
 		} else {
@@ -156,12 +163,13 @@ public class Player extends Entity {
 		}
 		} catch (ArrayIndexOutOfBoundsException e) {gameRect.y -= Math.ceil(velY); velY = 0; }
 		gameRect.x += Math.ceil(velX);
-		
+		rectX = (int) gameRect.getX();
+		rectY = (int) gameRect.getY();
 		try {
-		if (!(map.tiles[Math.floorDiv((int) (gameRect.getX() + gameRect.getWidth()),map.scaledTileSize)][Math.floorDiv((int) (gameRect.getY() + gameRect.getHeight()), map.scaledTileSize)].id >= map.wallIDPos) 
-		&& !(map.tiles[Math.floorDiv((int) (gameRect.getX()),map.scaledTileSize)][Math.floorDiv((int) (gameRect.getY() + gameRect.getHeight()), map.scaledTileSize)].id >= map.wallIDPos) 
-		&& !(map.tiles[Math.floorDiv((int) (gameRect.getX() + gameRect.getWidth()),map.scaledTileSize)][Math.floorDiv((int) (gameRect.getY()), map.scaledTileSize)].id >= map.wallIDPos)
-		&& !(map.tiles[Math.floorDiv((int) (gameRect.getX()),map.scaledTileSize)][Math.floorDiv((int) (gameRect.getY()), map.scaledTileSize)].id >= map.wallIDPos)) {
+		if (!(map.tiles[Math.floorDiv( rectX + tWidth, map.scaledTileSize)][Math.floorDiv(rectY + tHeight, map.scaledTileSize)].id >= map.wallIDPos) 
+		&& !(map.tiles[Math.floorDiv(rectX, map.scaledTileSize)][Math.floorDiv(rectY + tHeight, map.scaledTileSize)].id >= map.wallIDPos) 
+		&& !(map.tiles[Math.floorDiv(rectX + tWidth, map.scaledTileSize)][Math.floorDiv(rectY, map.scaledTileSize)].id >= map.wallIDPos)
+		&& !(map.tiles[Math.floorDiv(rectX, map.scaledTileSize)][Math.floorDiv(rectY, map.scaledTileSize)].id >= map.wallIDPos)) {
 
 			inGameX += Math.ceil(velX);
 		} else {
