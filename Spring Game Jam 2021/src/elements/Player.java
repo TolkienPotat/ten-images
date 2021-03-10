@@ -20,12 +20,12 @@ public class Player extends Entity {
 	float acceleration = 0.5f;
 
 	int tWidth, tHeight;
-	int scale = 1
-			
-	;
+
+	int scale = 1;
 	
 	int direction = 1;
 	float tcX, tcY;
+
 	
 	Color drawColor = new Color(1,1,1);
 	
@@ -46,7 +46,7 @@ public class Player extends Entity {
 
 		screenRect = new Rectangle(x, y, x + t.getWidth(), y + t.getHeight());
 
-		
+
 		tWidth = t.getWidth() * scale;
 		tHeight = t.getHeight() * scale;
 		
