@@ -37,7 +37,7 @@ public class Tree implements MapObject {
 	
 	public int tick(Point p, int mouse) {
 
-	
+
 		
 		if (bounds.contains(p) && mouse == 1) {
 			
@@ -76,6 +76,8 @@ public class Tree implements MapObject {
 		
 		inGameX = x;
 		inGameY = y;
+		
+		bounds.setBounds(x, y, texture.getWidth()*scale, texture.getHeight()*scale);
 		
 	}
 
