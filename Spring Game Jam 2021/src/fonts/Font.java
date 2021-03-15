@@ -371,7 +371,7 @@ public class Font {
             }
             Glyph g = glyphs.get(ch);
             renderer.begin();
-            renderer.drawTextureRegion(texture, drawX, drawY, g.x, g.y, g.width, g.height, c, 10000, 10000);
+            renderer.drawTextureRegion(texture, drawX, drawY, g.x, g.y, g.width, g.height, c, 10000, 10000, 0);
             renderer.end();
             drawX += g.width;
         }

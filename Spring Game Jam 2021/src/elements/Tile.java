@@ -17,7 +17,7 @@ public class Tile {
 	public MapObject object;
 
 	public int xInGame, yInGame;
-
+	int jungle = 0;
 	public Tile() {
 
 		id = 0;
@@ -26,6 +26,8 @@ public class Tile {
 
 		xInGame = 0;
 		yInGame = 0;
+		
+		
 
 	}
 
@@ -35,9 +37,14 @@ public class Tile {
 			return;
 		}
 
+		
+//		jungle = object.getJungle() - 1;
+		
 		if (object.tick(p, mouse) == -1) {
 			object = null;
 		}
+		
+		
 
 	}
 
@@ -49,6 +56,20 @@ public class Tile {
 
 		object.render(r, c);
 
+	}
+	
+	public int getJungle() {
+		if (object == null) {
+			return 0;
+		}
+		return object.getJungle();
+	}
+	
+	public void setJungle(int value) {
+		if (object == null) {
+			return;
+		}
+		object.setJungle(value);
 	}
 
 }

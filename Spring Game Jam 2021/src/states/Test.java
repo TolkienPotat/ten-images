@@ -1,6 +1,8 @@
 package states;
 
-import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
+import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_1;
+import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_2;
 
 import java.awt.Point;
 import java.nio.DoubleBuffer;
@@ -12,7 +14,7 @@ import elements.Camera;
 import elements.Map;
 import elements.Player;
 import main.Launcher;
-import objects.Tree;
+import objects.Jungle;
 import rendering.Renderer;
 import rendering.Texture;
 import window.Window;
@@ -55,7 +57,7 @@ public class Test implements State {
         player.inGameY = startPos.y;
         cursorInGame = new Point();
 
-        
+        map.addObject(new Jungle(0, 0), 0, 0);
 	}
 
 	@Override
@@ -93,7 +95,7 @@ public class Test implements State {
 		
 		
 		map.tickTiles(cursorInGame, mouse);
-		map.addObject(new Tree(player.inGameX, player.inGameY), player.inGameX, player.inGameY);
+//		map.addObject(new Jungle(player.inGameX, player.inGameY), player.inGameX, player.inGameY);
 		
 		if (player.x  >= 1920 - player.t.getWidth() +1) {
 			camera.moveRight();

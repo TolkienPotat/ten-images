@@ -86,7 +86,7 @@ public class Player extends Entity {
 	public void render(Renderer r) {
 		r.begin();
 		t.bind();
-		Renderer.drawTextureRegion(x, y, x+tWidth, y+tHeight, tcX, tcY, tcX+0.5f, tcY+0.5f, drawColor, inGameX, inGameY);
+		Renderer.drawTextureRegion(x, y, x+tWidth, y+tHeight, tcX, tcY, tcX+0.5f, tcY+0.5f, drawColor, inGameX, inGameY, 0);
 		r.end();
 	}
 

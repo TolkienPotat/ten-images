@@ -19,6 +19,8 @@ public class Tree implements MapObject {
 	public Texture texture;
 
 	public Rectangle bounds;
+	
+	int jungle = 0;
 
 	public Tree(int x, int y) {
 		texture = Texture.loadTexture("DefaultResources/Images/tree.png");
@@ -67,7 +69,7 @@ public class Tree implements MapObject {
 		r.begin();
 		texture.bind();
 		r.drawCustomTextureRegion(texture, x, y, 0, 0, texture.getWidth() * scale, texture.getHeight() * scale,
-				new Color(1, 1, 1), inGameX, inGameY);
+				new Color(1, 1, 1), inGameX, inGameY, jungle);
 		r.end();
 	}
 
@@ -79,6 +81,16 @@ public class Tree implements MapObject {
 		
 		bounds.setBounds(x, y, texture.getWidth()*scale, texture.getHeight()*scale);
 		
+	}
+
+	@Override
+	public int getJungle() {
+		return jungle;
+	}
+
+	@Override
+	public void setJungle(int value) {
+		jungle = value;
 	}
 
 }
