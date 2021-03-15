@@ -107,15 +107,21 @@ public class Renderer {
 
 	public void drawTexture(Texture texture, float x, float y, float xIG, float yIG) {
 
-		drawTexture(texture, x, y, new Color(1, 1, 1), xIG, yIG);
+		drawTexture(texture, x, y, new Color(1, 1, 1), xIG, yIG, 0);
+
+	}
+	
+	public void drawTexture(Texture texture, float x, float y, float xIG, float yIG, int jungle) {
+
+		drawTexture(texture, x, y, new Color(1, 1, 1), xIG, yIG, jungle);
 
 	}
 
-	public void drawColouredTexture(Texture texture, float x, float y, Color c, float xIG, float yIG) {
-		drawTexture(texture, x, y, c, xIG, yIG);
+	public void drawColouredTexture(Texture texture, float x, float y, Color c, float xIG, float yIG, int jungle) {
+		drawTexture(texture, x, y, c, xIG, yIG, jungle);
 	}
 
-	public static void drawTexture(Texture texture, float x, float y, Color c, float xIG, float yIG) {
+	public static void drawTexture(Texture texture, float x, float y, Color c, float xIG, float yIG, int jungle) {
 		/* Vertex positions */
 		float x1 = x;
 		float y1 = y;
@@ -128,16 +134,16 @@ public class Renderer {
 		float s2 = 1f;
 		float t2 = 1f;
 
-		drawTextureRegion(x1, y1, x2, y2, s1, t1, s2, t2, c, xIG, yIG); /* imp */
+		drawTextureRegion(x1, y1, x2, y2, s1, t1, s2, t2, c, xIG, yIG, jungle); /* imp */
 	}
 
 	public void drawTextureRegion(Texture texture, float x, float y, float regX, float regY, float regWidth,
-			float regHeight, float xIG, float yIG) {
-		drawTextureRegion(texture, x, y, regX, regY, regWidth, regHeight, new Color(1, 1, 1), xIG, yIG);
+			float regHeight, float xIG, float yIG, int jungle) {
+		drawTextureRegion(texture, x, y, regX, regY, regWidth, regHeight, new Color(1, 1, 1), xIG, yIG, jungle);
 	}
 
 	public void drawTextureRegion(Texture texture, float x, float y, float regX, float regY, float regWidth,
-			float regHeight, Color c, float xIG, float yIG) {
+			float regHeight, Color c, float xIG, float yIG, int jungle) {
 		/* Vertex positions */
 		float x1 = x;
 		float y1 = y;
@@ -153,11 +159,11 @@ public class Renderer {
 		float t2 = (regY + regHeight) / texture.getHeight();
 		
 
-		drawTextureRegion(x1, y1, x2, y2, s1, t1, s2, t2, c, xIG, yIG);
+		drawTextureRegion(x1, y1, x2, y2, s1, t1, s2, t2, c, xIG, yIG, jungle);
 	}
 	
 	public void drawCustomTextureRegion(Texture texture, float x, float y, float regX, float regY, float regWidth,
-			float regHeight, Color c, float xIG, float yIG) {
+			float regHeight, Color c, float xIG, float yIG, int jungle) {
 		/* Vertex positions */
 		float x1 = x;
 		float y1 = y;
@@ -173,17 +179,17 @@ public class Renderer {
 		float t1 = 0f;
 		float t2 = 1f;
 
-		drawTextureRegion(x1, y1, x2, y2, s1, t1, s2, t2, c, xIG, yIG);
+		drawTextureRegion(x1, y1, x2, y2, s1, t1, s2, t2, c, xIG, yIG, jungle);
 	}
 	
 	
 
 	public void drawTextureRegion(float x1, float y1, float x2, float y2, float s1, float t1, float s2, float t2,
-			float xIG, float yIG) {
-		drawTextureRegion(x1, y1, x2, y2, s1, t1, s2, t2, new Color(1, 1, 1), xIG, yIG);
+			float xIG, float yIG, int jungle) {
+		drawTextureRegion(x1, y1, x2, y2, s1, t1, s2, t2, new Color(1, 1, 1), xIG, yIG, jungle);
 	}
 
-	public static void drawTextureRegion(float x1, float y1, float x2, float y2, float s1, float t1, float s2, float t2, Color c, float xIG, float yIG) {
+	public static void drawTextureRegion(float x1, float y1, float x2, float y2, float s1, float t1, float s2, float t2, Color c, float xIG, float yIG, int jungle) {
 		if (vertices.remaining() < 7 * 8) {
 			/* We need more space in the buffer, so flush it */
 			flush();
@@ -194,13 +200,13 @@ public class Renderer {
 		float b = c.getBlue();
 		float a = c.getAlpha();
 
-		vertices.put(x1).put(y1).put(r).put(g).put(b).put(a).put(s1).put(t1).put(xIG + s1 * 40).put(yIG + t1 * 40);
-		vertices.put(x1).put(y2).put(r).put(g).put(b).put(a).put(s1).put(t2).put(xIG + s1 * 40).put(yIG + t2 * 40);
-		vertices.put(x2).put(y2).put(r).put(g).put(b).put(a).put(s2).put(t2).put(xIG + s2 * 40).put(yIG + t2 * 40);
+		vertices.put(x1).put(y1).put(r).put(g).put(b).put(a).put(s1).put(t1).put(xIG + s1 * 40).put(yIG + t1 * 40).put(jungle);
+		vertices.put(x1).put(y2).put(r).put(g).put(b).put(a).put(s1).put(t2).put(xIG + s1 * 40).put(yIG + t2 * 40).put(jungle);
+		vertices.put(x2).put(y2).put(r).put(g).put(b).put(a).put(s2).put(t2).put(xIG + s2 * 40).put(yIG + t2 * 40).put(jungle);
 
-		vertices.put(x1).put(y1).put(r).put(g).put(b).put(a).put(s1).put(t1).put(xIG + s1 * 40).put(yIG + t1 * 40);
-		vertices.put(x2).put(y2).put(r).put(g).put(b).put(a).put(s2).put(t2).put(xIG + s2 * 40).put(yIG + t2 * 40);
-		vertices.put(x2).put(y1).put(r).put(g).put(b).put(a).put(s2).put(t1).put(xIG + s2 * 40).put(yIG + t1 * 40);
+		vertices.put(x1).put(y1).put(r).put(g).put(b).put(a).put(s1).put(t1).put(xIG + s1 * 40).put(yIG + t1 * 40).put(jungle);
+		vertices.put(x2).put(y2).put(r).put(g).put(b).put(a).put(s2).put(t2).put(xIG + s2 * 40).put(yIG + t2 * 40).put(jungle);
+		vertices.put(x2).put(y1).put(r).put(g).put(b).put(a).put(s2).put(t1).put(xIG + s2 * 40).put(yIG + t1 * 40).put(jungle);
 
 		numVertices += 6;
 	}
@@ -298,21 +304,25 @@ public class Renderer {
 		/* Specify Vertex Pointer */
 		int posAttrib = program.getAttributeLocation("position");
 		program.enableVertexAttribute(posAttrib);
-		program.pointVertexAttribute(posAttrib, 2, 10 * Float.BYTES, 0);
+		program.pointVertexAttribute(posAttrib, 2, 11 * Float.BYTES, 0);
 
 		/* Specify Color Pointer */
 		int colAttrib = program.getAttributeLocation("color");
 		program.enableVertexAttribute(colAttrib);
-		program.pointVertexAttribute(colAttrib, 4, 10 * Float.BYTES, 2 * Float.BYTES);
+		program.pointVertexAttribute(colAttrib, 4, 11 * Float.BYTES, 2 * Float.BYTES);
 
 		/* Specify Texture Pointer */
 		int texAttrib = program.getAttributeLocation("texcoord");
 		program.enableVertexAttribute(texAttrib);
-		program.pointVertexAttribute(texAttrib, 2, 10 * Float.BYTES, 6 * Float.BYTES);
+		program.pointVertexAttribute(texAttrib, 2, 11 * Float.BYTES, 6 * Float.BYTES);
 		
 		int posigAttrib = program.getAttributeLocation("posInGame");
 		program.enableVertexAttribute(posigAttrib);
-		program.pointVertexAttribute(posigAttrib, 2, 10 * Float.BYTES, 8 * Float.BYTES);
+		program.pointVertexAttribute(posigAttrib, 2, 11 * Float.BYTES, 8 * Float.BYTES);
+		
+		int jungleAttrib = program.getAttributeLocation("jungle");
+		program.enableVertexAttribute(jungleAttrib);
+		program.pointVertexAttribute(jungleAttrib, 1, 11* Float.BYTES, 10 * Float.BYTES);
 
 	}
 
