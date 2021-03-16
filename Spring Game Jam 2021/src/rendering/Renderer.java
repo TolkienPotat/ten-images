@@ -14,6 +14,7 @@ import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
 import static org.lwjgl.opengl.GL15.GL_DYNAMIC_DRAW;
 import static org.lwjgl.opengl.GL20.GL_FRAGMENT_SHADER;
 import static org.lwjgl.opengl.GL20.GL_VERTEX_SHADER;
+//import static org.lwjgl.opengl.GL20.GL_DEPTH_TEST;
 
 import java.awt.Color;
 import java.nio.FloatBuffer;
@@ -40,6 +41,7 @@ public class Renderer {
 
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+//		glEnable(GL_DEPTH_TEST);
 
 		System.out.println("Renderer Successfully Initiated");
 	}

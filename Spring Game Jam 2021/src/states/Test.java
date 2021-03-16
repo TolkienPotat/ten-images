@@ -57,7 +57,7 @@ public class Test implements State {
         player.inGameY = startPos.y;
         cursorInGame = new Point();
 
-        map.addObject(new Jungle(0, 0), 0, 0);
+        map.addObject(new Jungle(7000, 7000), 7000, 7000);
 	}
 
 	@Override
@@ -97,6 +97,10 @@ public class Test implements State {
 		map.tickTiles(cursorInGame, mouse);
 //		map.addObject(new Jungle(player.inGameX, player.inGameY), player.inGameX, player.inGameY);
 		
+		if (mouse == 1) {
+			swingObject();
+		}
+		
 		if (player.x  >= 1920 - player.t.getWidth() +1) {
 			camera.moveRight();
 			player.velX = 8;
@@ -126,6 +130,12 @@ public class Test implements State {
 		point.y = (int) y;
 		return point;
 
+	}
+	
+	public void swingObject() {
+		
+		
+		
 	}
 	
 }

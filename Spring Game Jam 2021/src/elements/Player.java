@@ -60,7 +60,7 @@ public class Player extends Entity {
 		x = inGameX - camera.x;
 		y = inGameY - camera.y;
 
-	
+		
 		switch (direction) {
 		case 0 :
 			tcX = 0.5f;
@@ -155,7 +155,9 @@ public class Player extends Entity {
 		&& !(map.tiles[Math.floorDiv(rectX, map.scaledTileSize)][Math.floorDiv(rectY + tHeight, map.scaledTileSize)].id >= map.wallIDPos) 
 		&& !(map.tiles[Math.floorDiv(rectX + tWidth, map.scaledTileSize)][Math.floorDiv(rectY, map.scaledTileSize)].id >= map.wallIDPos)
 		&& !(map.tiles[Math.floorDiv(rectX, map.scaledTileSize)][Math.floorDiv(rectY, map.scaledTileSize)].id >= map.wallIDPos)) {
-			inGameY += Math.ceil(velY);
+			
+			
+			if (velY != 0 && map.tiles[Math.floorDiv(rectX, map.scaledTileSize)][Math.floorDiv(rectY, map.scaledTileSize)].getJungle() <= Math.abs(velY))inGameY += Math.ceil(velY)  - map.tiles[Math.floorDiv(rectX, map.scaledTileSize)][Math.floorDiv(rectY, map.scaledTileSize)].getJungle()*velY/Math.abs(velY);
 
 		} else {
 			
@@ -172,7 +174,8 @@ public class Player extends Entity {
 		&& !(map.tiles[Math.floorDiv(rectX + tWidth, map.scaledTileSize)][Math.floorDiv(rectY, map.scaledTileSize)].id >= map.wallIDPos)
 		&& !(map.tiles[Math.floorDiv(rectX, map.scaledTileSize)][Math.floorDiv(rectY, map.scaledTileSize)].id >= map.wallIDPos)) {
 
-			inGameX += Math.ceil(velX);
+			if (velX != 0 && map.tiles[Math.floorDiv(rectX, map.scaledTileSize)][Math.floorDiv(rectY, map.scaledTileSize)].getJungle() <= Math.abs(velX))inGameX += Math.ceil(velX)  - map.tiles[Math.floorDiv(rectX, map.scaledTileSize)][Math.floorDiv(rectY, map.scaledTileSize)].getJungle()*velX/Math.abs(velX);
+
 		} else {
 			
 			gameRect.x -= Math.ceil(velX);
