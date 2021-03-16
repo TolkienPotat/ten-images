@@ -27,7 +27,7 @@ public class Jungle implements MapObject{
 
 	public Rectangle bounds;
 	
-	private int growthRate = 1;
+	private int growthRate = 600;
 
 	public Jungle(int x, int y) {
 		texture = new Texture[8];
