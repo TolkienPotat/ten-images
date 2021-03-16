@@ -19,7 +19,7 @@ public class Texture {
      * Stores the handle of the texture.
      */
     private final int id;
-
+	
     /**
      * Width of the texture.
      */

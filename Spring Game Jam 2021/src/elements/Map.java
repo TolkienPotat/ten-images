@@ -149,7 +149,7 @@ public class Map {
 					d = 0;
 				}
 				
-				if (tiles[i][j].getJungle() == 0 && a + b + c + d >=3) {
+				if (tiles[i][j].getJungle() == 0 && a + b + c + d >=3 && random.nextInt(850-a*50+b*50+c*50+d*50) == 1) {
 					if (tiles[i][j].object == null) {
 						tiles[i][j].object = new Jungle(i * scaledTileSize, j * scaledTileSize);
 					} else {

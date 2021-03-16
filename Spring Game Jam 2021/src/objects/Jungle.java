@@ -21,7 +21,7 @@ public class Jungle implements MapObject{
 	
 	int stage = 1;
 	
-	int maxStage = 3;
+	int maxStage = 4;
 	
 	public Texture[] texture;
 
@@ -31,10 +31,13 @@ public class Jungle implements MapObject{
 		texture = new Texture[8];
 		inGameX = x;
 		inGameY = y;
+		
+		random = new Random();
+		
 		setTextures();
 		bounds = new Rectangle(x, y, texture[0].getWidth()*scale, texture[0].getHeight()*scale);
 		
-		random = new Random();
+		
 
 	}
 	
@@ -82,6 +85,7 @@ public class Jungle implements MapObject{
 		texture[0] = Texture.loadTexture("DefaultResources/Images/jungle-0.png");
 		texture[1] = Texture.loadTexture("DefaultResources/Images/jungle-1.png");
 		texture[2] = Texture.loadTexture("DefaultResources/Images/jungle-2.png");
+		texture[3] = Texture.loadTexture("DefaultResources/Images/jungle-3-" + random.nextInt(3) + ".png");
 		
 	}
 
