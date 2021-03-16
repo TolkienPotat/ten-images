@@ -1,6 +1,8 @@
 package states;
 
-import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
+import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_1;
+import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_2;
 
 import java.awt.Point;
 import java.nio.DoubleBuffer;
@@ -12,7 +14,7 @@ import elements.Camera;
 import elements.Map;
 import elements.Player;
 import main.Launcher;
-import objects.Tree;
+import objects.Jungle;
 import rendering.Renderer;
 import rendering.Texture;
 import window.Window;
@@ -24,7 +26,7 @@ public class Test implements State {
 	private Map map;
 	private Player player;
 	
-	
+	final Point startPos = new Point(7000, 7000);
 	
 	Point cursor;
 	
@@ -49,13 +51,13 @@ public class Test implements State {
 		map = new Map();
         map.loadMapFile("DefaultResources/Files/test-map.map", 200, 200);
         player = new Player(Texture.loadTexture("DefaultResources/Images/GPlayer-Sheet.png"));
-        camera = new Camera(0, 0);
-        
-        player.inGameX = 1920/2;
-        player.inGameY = 1080/2;
+        camera = new Camera(Math.floorDiv(startPos.x, 1920)*1920, Math.floorDiv(startPos.y, 1080)*1080);
+        System.out.println(camera.x + " " + camera.y);
+        player.inGameX = startPos.x;
+        player.inGameY = startPos.y;
         cursorInGame = new Point();
 
-        
+        map.addObject(new Jungle(7000, 7000), 7000, 7000);
 	}
 
 	@Override
@@ -92,8 +94,12 @@ public class Test implements State {
 
 		
 		
-		map.tickTiles(cursor, mouse);
-		map.addObject(new Tree(player.inGameX, player.inGameY), player.inGameX, player.inGameY);
+		map.tickTiles(cursorInGame, mouse);
+//		map.addObject(new Jungle(player.inGameX, player.inGameY), player.inGameX, player.inGameY);
+		
+		if (mouse == 1) {
+			swingObject();
+		}
 		
 		if (player.x  >= 1920 - player.t.getWidth() +1) {
 			camera.moveRight();
@@ -124,6 +130,12 @@ public class Test implements State {
 		point.y = (int) y;
 		return point;
 
+	}
+	
+	public void swingObject() {
+		
+		
+		
 	}
 	
 }

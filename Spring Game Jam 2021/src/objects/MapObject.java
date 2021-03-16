@@ -27,4 +27,8 @@ public interface MapObject {
 	
 	public void setPos(int x, int y);
 	
+	public int getJungle();
+	
+	public void setJungle(int value);
+	
 }

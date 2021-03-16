@@ -4,9 +4,12 @@ import java.awt.Color;
 import java.awt.Point;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Random;
 import java.util.Scanner;
 
+import objects.Jungle;
 import objects.MapObject;
+import objects.Tree;
 import rendering.Renderer;
 import rendering.Texture;
 
@@ -27,7 +30,7 @@ public class Map {
 	public int wallIDPos = 8;
 	
 	
-	
+	Random random;
 	
 
 	public Map() {
@@ -35,7 +38,7 @@ public class Map {
 		texture = new Texture[16];
 		setTextures();
 		
-		
+		random = new Random();
 		
 	}
 
@@ -58,6 +61,7 @@ public class Map {
 					tiles[m][l].id = sc.nextInt();
 					tiles[m][l].xInGame = m*tileSize*scale;
 					tiles[m][l].yInGame = l*tileSize*scale;
+					if (random.nextInt(10) == 0) tiles[m][l].object = new Tree(tiles[m][l].xInGame, tiles[m][l].yInGame);
 
 				}
 
@@ -107,8 +111,8 @@ public class Map {
 				
 				renderer.begin();
 				texture[tiles[i][j].id].bind();
-
-				renderer.drawCustomTextureRegion(texture[tiles[i][j].id], tiles[i][j].x, tiles[i][j].y, 0, 0, tileSize*scale, tileSize*scale, new Color(1, 1, 1), tiles[i][j].xInGame, tiles[i][j].yInGame);
+				
+				renderer.drawCustomTextureRegion(texture[tiles[i][j].id], tiles[i][j].x, tiles[i][j].y, 0, 0, tileSize*scale, tileSize*scale, new Color(1, 1, 1), tiles[i][j].xInGame, tiles[i][j].yInGame, tiles[i][j].jungle);
 				renderer.end();
 				
 				
@@ -123,11 +127,39 @@ public class Map {
 		for (int i = 0; i < xTiles; i++) {
 			for (int j = 0; j < yTiles; j++) {
 				
-				
-				
-				if ((tiles[i][j].x > 3840 || tiles[i][j].x < -1920) || (tiles[i][j].y > 2160 || tiles[i][j].y < -1080)) {
-					continue;
+				int a, b, c, d;
+				try {
+					a = tiles[i+1][j].getJungle();
+				} catch (ArrayIndexOutOfBoundsException e) {
+					a = 0;
 				}
+				try {
+					b = tiles[i-1][j].getJungle();
+				} catch (ArrayIndexOutOfBoundsException e) {
+					b = 0;
+				}
+				try {
+					c = tiles[i][j+1].getJungle();
+				} catch (ArrayIndexOutOfBoundsException e) {
+					c = 0;
+				}
+				try {
+					d = tiles[i][j-1].getJungle();
+				} catch (ArrayIndexOutOfBoundsException e) {
+					d = 0;
+				}
+				
+				if (tiles[i][j].getJungle() == 0 && a + b + c + d >=3 && random.nextInt(850-a*50+b*50+c*50+d*50) == 1) {
+					if (tiles[i][j].object == null) {
+						tiles[i][j].object = new Jungle(i * scaledTileSize, j * scaledTileSize);
+					} else {
+						tiles[i][j].setJungle(1);
+					}
+					
+				}
+//				if ((tiles[i][j].x > 3840 || tiles[i][j].x < -1920) || (tiles[i][j].y > 2160 || tiles[i][j].y < -1080)) {
+//					continue;
+//				}
 				
 				
 				tiles[i][j].tick(mousePos, mouseButtons);
