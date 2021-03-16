@@ -107,7 +107,7 @@ public class Player extends Entity {
 			r.drawTextureRegion(x + 13, y + 6, x + 13 + heldObject.getWidth()*heldObjectScale, y + 6 + heldObject.getHeight()*heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0);
 			break;
 		case 1 :
-			
+			r.drawTextureRegion(x - 16, y + 6, x - 16 + heldObject.getWidth()*heldObjectScale, y + 6 + heldObject.getHeight()*heldObjectScale, 1, 0, 0, 1, drawColor, 0, 0, 0);
 			break;
 		case 2 :
 			
