@@ -20,11 +20,14 @@ public class Player extends Entity {
 	float acceleration = 0.5f;
 
 	int tWidth, tHeight;
-	
+
 	int scale = 1;
 	
 	int direction = 1;
 	float tcX, tcY;
+	//test
+	public Texture heldObject;	
+	int heldObjectScale = 3;
 	
 	Color drawColor = new Color(1,1,1);
 	
@@ -54,6 +57,8 @@ public class Player extends Entity {
 		gameRect = new Rectangle(inGameX, inGameY, tWidth, tHeight);
 		
 		i = new Inventory();
+		
+		heldObject = Texture.loadTexture("DefaultResources/Images/tool.png");
 	}
 
 
@@ -93,6 +98,24 @@ public class Player extends Entity {
 		r.begin();
 		t.bind();
 		r.drawTextureRegion(x, y, x+tWidth, y+tHeight, tcX, tcY, tcX+0.5f, tcY+0.5f, drawColor, inGameX, inGameY, 0);
+		r.end();
+		
+		r.begin();
+		heldObject.bind();
+		switch (direction) {
+		case 0 :
+			r.drawTextureRegion(x + 13, y + 6, x + 13 + heldObject.getWidth()*heldObjectScale, y + 6 + heldObject.getHeight()*heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0);
+			break;
+		case 1 :
+			
+			break;
+		case 2 :
+			
+			break;
+		case 3 :
+			
+			break;
+		}
 		r.end();
 		
 		i.render(r);

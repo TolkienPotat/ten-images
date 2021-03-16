@@ -10,6 +10,7 @@ import java.util.Scanner;
 import objects.Jungle;
 import objects.MapObject;
 import objects.Tree;
+import particles.ParticleHandler;
 import rendering.Renderer;
 import rendering.Texture;
 
@@ -29,6 +30,8 @@ public class Map {
 	
 	public int wallIDPos = 8;
 	
+	public ParticleHandler particle;
+	
 	
 	Random random;
 	
@@ -39,6 +42,8 @@ public class Map {
 		setTextures();
 		
 		random = new Random();
+		
+		particle = new ParticleHandler();
 		
 	}
 
@@ -123,6 +128,11 @@ public class Map {
 		}
 	}
 
+	public void renderParticles(Camera c, Renderer r) {
+		particle.render(r, c);
+	}
+	
+	
 	public void tickTiles(Point mousePos, int mouseButtons) {
 		for (int i = 0; i < xTiles; i++) {
 			for (int j = 0; j < yTiles; j++) {
@@ -157,21 +167,29 @@ public class Map {
 					}
 					
 				}
-//				if ((tiles[i][j].x > 3840 || tiles[i][j].x < -1920) || (tiles[i][j].y > 2160 || tiles[i][j].y < -1080)) {
-//					continue;
-//				}
+
 				
 				
-				tiles[i][j].tick(mousePos, mouseButtons);
+				int t = tiles[i][j].tick(mousePos, mouseButtons);
+				
+				if (t == 1 && random.nextInt(5) == 0) {
+					
+					particle.add(tiles[i][j].getObjectTexture(), i*scaledTileSize, j*scaledTileSize, tiles[i][j].getObjectTexture().getWidth() * MapObject.scale, tiles[i][j].getObjectTexture().getHeight() * MapObject.scale, tiles[i][j].getJungle(), 1);
+					
+				} else if (t == -1) {
+					
+					particle.add(tiles[i][j].getObjectTexture(), i*scaledTileSize, j*scaledTileSize, tiles[i][j].getObjectTexture().getWidth() * MapObject.scale, tiles[i][j].getObjectTexture().getHeight() * MapObject.scale, tiles[i][j].getJungle(), 50);
+
+					
+				}
 				
 				
-				
-				
-				
+
 				
 				
 			}
 		}
+		particle.tick();
 	}
 	
 	
@@ -196,6 +214,9 @@ public class Map {
 				
 			}
 		}
+		
+
+		
 	}
 	
 	public void addObject(MapObject m, int x, int y) {

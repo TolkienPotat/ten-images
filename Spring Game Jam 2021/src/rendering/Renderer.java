@@ -19,12 +19,14 @@ import static org.lwjgl.opengl.GL20.GL_VERTEX_SHADER;
 import java.awt.Color;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.MemoryUtil;
 
 import fonts.Font;
 import matrixes.Matrix4f;
+import matrixes.Vector2f;
 
 public class Renderer {
 
@@ -212,6 +214,62 @@ public class Renderer {
 		numVertices += 6;
 	}
 
+	public void drawRotatedTexture(float x1, float y1, float x2, float y2, float s1, float t1, float s2, float t2, Color c, float xIG, float yIG, int jungle, int degrees) {
+		
+		
+		
+		Vector2f x1y1 = new Vector2f(x1, y1);
+		Vector2f x1y2 = new Vector2f(x1, y2);
+		Vector2f x2y1 = new Vector2f(x2, y1);
+		Vector2f x2y2 = new Vector2f(x2, y2);
+		Vector2f center = new Vector2f(x1 + (x2 - x1)/2, y1 + (y2 - y1)/2);
+		
+		float radius = (float) Math.sqrt((Math.pow((x2y2.x - center.x), 2) + (Math.pow((x2y2.y - center.y), 2))));
+		
+		float sideX = (float) (radius * Math.cos(Math.toRadians(degrees - 135)));
+		float sideY = (float) (radius * Math.sin(Math.toRadians(degrees - 135)));
+		
+		x1y1 = new Vector2f(center.x + sideX, center.y + sideY);
+		
+		sideX = (float) (radius * Math.cos(Math.toRadians(degrees - 225)));
+		sideY = (float) (radius * Math.sin(Math.toRadians(degrees - 225)));
+		
+		x1y2 = new Vector2f(center.x + sideX, center.y + sideY);
+		
+		sideX = (float) (radius * Math.cos(Math.toRadians(degrees - 45)));
+		sideY = (float) (radius * Math.sin(Math.toRadians(degrees - 45)));
+		
+		x2y1 = new Vector2f(center.x + sideX, center.y + sideY);
+		
+		sideX = (float) (radius * Math.cos(Math.toRadians(degrees - 315)));
+		sideY = (float) (radius * Math.sin(Math.toRadians(degrees - 315)));
+		
+		x2y2 = new Vector2f(center.x + sideX, center.y + sideY);
+		
+		if (vertices.remaining() < 7 * 8) {
+			/* We need more space in the buffer, so flush it */
+			flush();
+		}
+
+		float r = c.getRed();
+		float g = c.getGreen();
+		float b = c.getBlue();
+		float a = c.getAlpha();
+		
+		vertices.put(x1y1.x).put(x1y1.y).put(r).put(g).put(b).put(a).put(s1).put(t1).put(xIG + s1 * 40).put(yIG + t1 * 40).put(jungle);
+		vertices.put(x1y2.x).put(x1y2.y).put(r).put(g).put(b).put(a).put(s1).put(t2).put(xIG + s1 * 40).put(yIG + t2 * 40).put(jungle);
+		vertices.put(x2y2.x).put(x2y2.y).put(r).put(g).put(b).put(a).put(s2).put(t2).put(xIG + s2 * 40).put(yIG + t2 * 40).put(jungle);
+
+		vertices.put(x1y1.x).put(x1y1.y).put(r).put(g).put(b).put(a).put(s1).put(t1).put(xIG + s1 * 40).put(yIG + t1 * 40).put(jungle);
+		vertices.put(x2y2.x).put(x2y2.y).put(r).put(g).put(b).put(a).put(s2).put(t2).put(xIG + s2 * 40).put(yIG + t2 * 40).put(jungle);
+		vertices.put(x2y1.x).put(x2y1.y).put(r).put(g).put(b).put(a).put(s2).put(t1).put(xIG + s2 * 40).put(yIG + t1 * 40).put(jungle);
+
+		numVertices += 6;
+		
+		
+	}
+	
+	
 	public static void dispose() {
 		MemoryUtil.memFree(vertices);
 
