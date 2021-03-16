@@ -23,13 +23,22 @@ public class Player extends Entity {
 
 	int scale = 1;
 	
+	
+	
 	int direction = 1;
 	float tcX, tcY;
 
+	//test
+	public Texture heldObject;	
+	int heldObjectScale = 3;
+	
+	
 	
 	Color drawColor = new Color(1,1,1);
 	
 	int maxVelocity = 6;
+	
+	
 	
 	boolean hasMovedSinceCamera = true;
 
@@ -51,6 +60,8 @@ public class Player extends Entity {
 		tHeight = t.getHeight() * scale;
 		
 		gameRect = new Rectangle(inGameX, inGameY, tWidth, tHeight);
+		
+		heldObject = Texture.loadTexture("DefaultResources/Images/tool.png");
 	}
 
 
@@ -59,7 +70,7 @@ public class Player extends Entity {
 		move(map);
 		x = inGameX - camera.x;
 		y = inGameY - camera.y;
-
+		
 		
 		switch (direction) {
 		case 0 :
@@ -86,7 +97,25 @@ public class Player extends Entity {
 	public void render(Renderer r) {
 		r.begin();
 		t.bind();
-		Renderer.drawTextureRegion(x, y, x+tWidth, y+tHeight, tcX, tcY, tcX+0.5f, tcY+0.5f, drawColor, inGameX, inGameY, 0);
+		r.drawTextureRegion(x, y, x+tWidth, y+tHeight, tcX, tcY, tcX+0.5f, tcY+0.5f, drawColor, inGameX, inGameY, 0);
+		r.end();
+		
+		r.begin();
+		heldObject.bind();
+		switch (direction) {
+		case 0 :
+			r.drawTextureRegion(x + 13, y + 6, x + 13 + heldObject.getWidth()*heldObjectScale, y + 6 + heldObject.getHeight()*heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0);
+			break;
+		case 1 :
+			
+			break;
+		case 2 :
+			
+			break;
+		case 3 :
+			
+			break;
+		}
 		r.end();
 	}
 
@@ -97,14 +126,14 @@ public class Player extends Entity {
 			direction = 3;
 		} 
 		
-		if(window.isKeyPressed(GLFW_KEY_A)) {
-			if (velX > -maxVelocity)velX--;
-			direction = 2;
-		} 
-		
 		if(window.isKeyPressed(GLFW_KEY_S)) {
 			if (velY > -maxVelocity) velY--;
 			direction = 1;
+		} 
+		
+		if(window.isKeyPressed(GLFW_KEY_A)) {
+			if (velX > -maxVelocity)velX--;
+			direction = 2;
 		} 
 		
 		if(window.isKeyPressed(GLFW_KEY_D)) {

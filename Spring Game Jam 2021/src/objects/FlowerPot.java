@@ -79,4 +79,11 @@ public class FlowerPot implements MapObject{
 		jungle = value;
 	}
 
+
+
+	@Override
+	public Texture getTexture() {
+		return texture;
+	}
+
 }

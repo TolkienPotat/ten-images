@@ -44,13 +44,13 @@ public class Tree implements MapObject {
 		if (bounds.contains(p) && mouse == 1) {
 			
 			health--;
-			
-			
+			if (health <= 0) {
+				return -1;
+			}
+			return 1;
 		}
 		
-		if (health <= 0) {
-			return -1;
-		}
+		
 		return 0;
 	}
 	
@@ -91,6 +91,11 @@ public class Tree implements MapObject {
 	@Override
 	public void setJungle(int value) {
 		jungle = value;
+	}
+
+	@Override
+	public Texture getTexture() {
+		return texture;
 	}
 
 }

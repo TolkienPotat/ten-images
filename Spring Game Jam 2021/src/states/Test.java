@@ -35,13 +35,18 @@ public class Test implements State {
 	int mouse = 0;
 	
 	
+	
+	
 	@Override
 	public void render(Renderer r) {
 		map.render(camera, r);
 
+		
+		
+		map.renderParticles(camera, r);
 		map.renderObjects(camera, r);
 		player.render(r);
-		
+
 	}
 
 	
@@ -52,12 +57,14 @@ public class Test implements State {
         map.loadMapFile("DefaultResources/Files/test-map.map", 200, 200);
         player = new Player(Texture.loadTexture("DefaultResources/Images/GPlayer-Sheet.png"));
         camera = new Camera(Math.floorDiv(startPos.x, 1920)*1920, Math.floorDiv(startPos.y, 1080)*1080);
-        System.out.println(camera.x + " " + camera.y);
+        
         player.inGameX = startPos.x;
         player.inGameY = startPos.y;
         cursorInGame = new Point();
 
         map.addObject(new Jungle(7000, 7000), 7000, 7000);
+        
+        
 	}
 
 	@Override
@@ -84,7 +91,7 @@ public class Test implements State {
 	@Override
 	public void tick() {
 		player.tick(camera, map);
-		
+
 		
 		
 		if (camera.moving) {
@@ -95,7 +102,7 @@ public class Test implements State {
 		
 		
 		map.tickTiles(cursorInGame, mouse);
-//		map.addObject(new Jungle(player.inGameX, player.inGameY), player.inGameX, player.inGameY);
+
 		
 		if (mouse == 1) {
 			swingObject();
