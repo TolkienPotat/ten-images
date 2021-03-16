@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 
 import objects.MapObject;
 import rendering.Renderer;
+import rendering.Texture;
 
 public class Tile {
 
@@ -18,6 +19,10 @@ public class Tile {
 
 	public int xInGame, yInGame;
 	int jungle = 0;
+	
+	
+	boolean shouldKillObject = false;
+	
 	public Tile() {
 
 		id = 0;
@@ -31,20 +36,25 @@ public class Tile {
 
 	}
 
-	public void tick(Point p, int mouse) {
+	public int tick(Point p, int mouse) {
 
+		if (shouldKillObject) {
+			shouldKillObject = false;
+			object = null;
+		}
+		
 		if (object == null) {
-			return;
+			return 0;
 		}
 
 		
 //		jungle = object.getJungle() - 1;
-		
-		if (object.tick(p, mouse) == -1) {
-			object = null;
+		int i = object.tick(p, mouse);
+		if (i == -1) {
+			shouldKillObject = true;
 		}
 		
-		
+		return i;
 
 	}
 
@@ -70,6 +80,10 @@ public class Tile {
 			return;
 		}
 		object.setJungle(value);
+	}
+	
+	public Texture getObjectTexture() {
+		return object.getTexture();
 	}
 
 }

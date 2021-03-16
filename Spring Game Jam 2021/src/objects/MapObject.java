@@ -4,6 +4,7 @@ import java.awt.Point;
 
 import elements.Camera;
 import rendering.Renderer;
+import rendering.Texture;
 
 public interface MapObject {
 
@@ -19,7 +20,7 @@ public interface MapObject {
 	public void render(Renderer r, Camera c);
 
 
-
+	public Texture getTexture();
 
 
 

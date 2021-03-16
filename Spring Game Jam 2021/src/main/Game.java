@@ -5,9 +5,6 @@ import states.State;
 import states.StateMachine;
 import window.Window;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.lwjgl.opengl.GL30;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -20,7 +17,7 @@ public class Game {
 
 	public Window mainWindow;
 
-	public Map<Integer, Boolean> keyMap;
+	
 
 	public int rightMouse;
 
@@ -44,7 +41,7 @@ public class Game {
 		defaultRenderer = new Renderer();
 		defaultRenderer.init("DefaultResources/Files/fragshad.frag", "DefaultResources/Files/vertexshader.vert");
 
-		keyMap = new HashMap<Integer, Boolean>();
+		
 		
 
 	}
@@ -109,6 +106,7 @@ public class Game {
 	
 	public void exit() {
 		glfwDestroyWindow(mainWindow.getID());
+		Renderer.dispose();
 		mainWindow.input.free();
 		mainWindow.minput.free();
 		glfwTerminate();
