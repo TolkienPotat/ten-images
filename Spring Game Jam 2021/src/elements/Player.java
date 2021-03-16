@@ -31,6 +31,8 @@ public class Player extends Entity {
 	int maxVelocity = 6;
 	
 	boolean hasMovedSinceCamera = true;
+	
+	public Inventory i;
 
 
 	public Player(Texture t) {
@@ -50,6 +52,8 @@ public class Player extends Entity {
 		tHeight = t.getHeight() * scale;
 		
 		gameRect = new Rectangle(inGameX, inGameY, tWidth, tHeight);
+		
+		i = new Inventory();
 	}
 
 
@@ -59,6 +63,7 @@ public class Player extends Entity {
 		x = inGameX - camera.x;
 		y = inGameY - camera.y;
 
+		i.tick(this);
 		
 		switch (direction) {
 		case 0 :
@@ -78,15 +83,19 @@ public class Player extends Entity {
 			tcY = 0.5f;
 			break;
 		}
-
+		
+		
+		
 	}
 	
 	@Override
 	public void render(Renderer r) {
 		r.begin();
 		t.bind();
-		Renderer.drawTextureRegion(x, y, x+tWidth, y+tHeight, tcX, tcY, tcX+0.5f, tcY+0.5f, drawColor, inGameX, inGameY, 0);
+		r.drawTextureRegion(x, y, x+tWidth, y+tHeight, tcX, tcY, tcX+0.5f, tcY+0.5f, drawColor, inGameX, inGameY, 0);
 		r.end();
+		
+		i.render(r);
 	}
 
 	public void input(Window window) {
@@ -110,6 +119,8 @@ public class Player extends Entity {
 			if (velX < maxVelocity) velX++;
 			direction = 0;
 		} 
+		
+		i.input(window);
 	}
 	
 	public void printCoords() {

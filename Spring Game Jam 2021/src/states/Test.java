@@ -52,7 +52,7 @@ public class Test implements State {
         map.loadMapFile("DefaultResources/Files/test-map.map", 200, 200);
         player = new Player(Texture.loadTexture("DefaultResources/Images/GPlayer-Sheet.png"));
         camera = new Camera(Math.floorDiv(startPos.x, 1920)*1920, Math.floorDiv(startPos.y, 1080)*1080);
-        System.out.println(camera.x + " " + camera.y);
+//        System.out.println(camera.x + " " + camera.y);
         player.inGameX = startPos.x;
         player.inGameY = startPos.y;
         cursorInGame = new Point();

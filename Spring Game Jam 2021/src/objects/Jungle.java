@@ -26,6 +26,8 @@ public class Jungle implements MapObject{
 	public Texture[] texture;
 
 	public Rectangle bounds;
+	
+	private int growthRate = 1;
 
 	public Jungle(int x, int y) {
 		texture = new Texture[8];
@@ -63,7 +65,7 @@ public class Jungle implements MapObject{
 	@Override
 	public int tick(Point p, int mouse) {
 		
-		if (random.nextInt(600) == 4 && stage < maxStage) {
+		if (random.nextInt(growthRate) == 0 && stage < maxStage) {
 			stage++;
 		}
 		
