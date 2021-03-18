@@ -37,8 +37,9 @@ public class Test implements State {
 	@Override
 	public void render(Renderer r) {
 		map.render(camera, r);
-
+		map.renderParticles(camera, r);
 		map.renderObjects(camera, r);
+		
 		player.render(r);
 
 		
