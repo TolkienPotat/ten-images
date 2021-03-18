@@ -26,14 +26,16 @@ public class Jungle implements MapObject {
 	public Texture[] texture;
 
 	public Rectangle bounds;
+	
+	private int growthRate = 600;
 
 	public Jungle(int x, int y) {
 		texture = new Texture[8];
 		inGameX = x;
 		inGameY = y;
-
+		
 		random = new Random();
-
+		
 		setTextures();
 		bounds = new Rectangle(x, y, texture[0].getWidth() * scale, texture[0].getHeight() * scale);
 
@@ -54,7 +56,7 @@ public class Jungle implements MapObject {
 		r.drawCustomTextureRegion(texture[stage - 1], x, y, 0, 0, texture[stage - 1].getWidth() * scale,
 				texture[stage - 1].getHeight() * scale, new Color(1, 1, 1), inGameX, inGameY, stage);
 		r.end();
-
+		
 	}
 
 	@Override
@@ -69,11 +71,11 @@ public class Jungle implements MapObject {
 			return 1;
 		}
 
-		if (random.nextInt(600) == 4 && stage < maxStage) {
+		if (random.nextInt(growthRate) == 0 && stage < maxStage) {
 			stage++;
 			health = stage * 200;
 		}
-
+		
 		return 0;
 	}
 
@@ -86,20 +88,22 @@ public class Jungle implements MapObject {
 		bounds.setBounds(x, y, texture[0].getWidth() * scale, texture[0].getHeight() * scale);
 
 	}
-
+	
 	public void setTextures() {
-
+		
 		texture[0] = Texture.loadTexture("DefaultResources/Images/jungle-0.png");
 		texture[1] = Texture.loadTexture("DefaultResources/Images/jungle-1.png");
 		texture[2] = Texture.loadTexture("DefaultResources/Images/jungle-2.png");
 		texture[3] = Texture.loadTexture("DefaultResources/Images/jungle-3-" + random.nextInt(3) + ".png");
-
+		
 	}
+
 
 	@Override
 	public int getJungle() {
 		return stage;
 	}
+
 
 	@Override
 	public void setJungle(int value) {
