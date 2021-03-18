@@ -95,7 +95,7 @@ public class Test implements State {
 		
 		
 		map.tickTiles(cursorInGame, mouse);
-//		map.addObject(new Jungle(player.inGameX, player.inGameY), player.inGameX, player.inGameY);
+
 		
 		if (mouse == 1) {
 			swingObject();
