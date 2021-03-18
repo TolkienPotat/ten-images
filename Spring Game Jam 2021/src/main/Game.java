@@ -47,6 +47,8 @@ public class Game {
 	}
 
 	public void run() {
+		
+		tick();
 
 		double secsPerUpdate = 1000000000 / 60.0d;
 		double previous = System.nanoTime();

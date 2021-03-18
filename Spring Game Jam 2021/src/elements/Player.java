@@ -23,24 +23,19 @@ public class Player extends Entity {
 
 	int scale = 1;
 	
-	
-	
 	int direction = 1;
 	float tcX, tcY;
-
 	//test
 	public Texture heldObject;	
 	int heldObjectScale = 3;
-	
-	
 	
 	Color drawColor = new Color(1,1,1);
 	
 	int maxVelocity = 6;
 	
-	
-	
 	boolean hasMovedSinceCamera = true;
+	
+	public Inventory i;
 
 
 	public Player(Texture t) {
@@ -55,11 +50,13 @@ public class Player extends Entity {
 
 		screenRect = new Rectangle(x, y, x + t.getWidth(), y + t.getHeight());
 
-
+		
 		tWidth = t.getWidth() * scale;
 		tHeight = t.getHeight() * scale;
 		
 		gameRect = new Rectangle(inGameX, inGameY, tWidth, tHeight);
+		
+		i = new Inventory();
 		
 		heldObject = Texture.loadTexture("DefaultResources/Images/tool.png");
 	}
@@ -70,7 +67,8 @@ public class Player extends Entity {
 		move(map);
 		x = inGameX - camera.x;
 		y = inGameY - camera.y;
-		
+
+		i.tick(this);
 		
 		switch (direction) {
 		case 0 :
@@ -90,7 +88,9 @@ public class Player extends Entity {
 			tcY = 0.5f;
 			break;
 		}
-
+		
+		
+		
 	}
 	
 	@Override
@@ -107,7 +107,7 @@ public class Player extends Entity {
 			r.drawTextureRegion(x + 13, y + 6, x + 13 + heldObject.getWidth()*heldObjectScale, y + 6 + heldObject.getHeight()*heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0);
 			break;
 		case 1 :
-			
+			r.drawTextureRegion(x - 16, y + 6, x - 16 + heldObject.getWidth()*heldObjectScale, y + 6 + heldObject.getHeight()*heldObjectScale, 1, 0, 0, 1, drawColor, 0, 0, 0);
 			break;
 		case 2 :
 			
@@ -117,6 +117,8 @@ public class Player extends Entity {
 			break;
 		}
 		r.end();
+		
+		i.render(r);
 	}
 
 	public void input(Window window) {
@@ -124,22 +126,26 @@ public class Player extends Entity {
 		if(window.isKeyPressed(GLFW_KEY_W)) {
 			if (velY < maxVelocity) velY++;
 			direction = 3;
-		} 
+		}
 		
 		if(window.isKeyPressed(GLFW_KEY_S)) {
 			if (velY > -maxVelocity) velY--;
 			direction = 1;
-		} 
+		}
 		
 		if(window.isKeyPressed(GLFW_KEY_A)) {
 			if (velX > -maxVelocity)velX--;
 			direction = 2;
 		} 
 		
+		
+		
 		if(window.isKeyPressed(GLFW_KEY_D)) {
 			if (velX < maxVelocity) velX++;
 			direction = 0;
 		} 
+		
+		i.input(window);
 	}
 	
 	public void printCoords() {

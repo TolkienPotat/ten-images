@@ -34,20 +34,13 @@ public class Test implements State {
 	int mouse = 0;
 	
 	
-	
-	
 	@Override
 	public void render(Renderer r) {
 		map.render(camera, r);
 
-		
-		
-		map.renderParticles(camera, r);
 		map.renderObjects(camera, r);
 		player.render(r);
 
-		
-		
 		
 	}
 
@@ -65,8 +58,6 @@ public class Test implements State {
         cursorInGame = new Point();
 
         map.addObject(new Jungle(7000, 7000), 7000, 7000);
-        
-        
 	}
 
 	@Override
@@ -93,7 +84,7 @@ public class Test implements State {
 	@Override
 	public void tick() {
 		player.tick(camera, map);
-
+		
 		
 		
 		if (camera.moving) {

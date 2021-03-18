@@ -188,8 +188,7 @@ public class Renderer {
 	
 	
 
-	public void drawTextureRegion(float x1, float y1, float x2, float y2, float s1, float t1, float s2, float t2,
-			float xIG, float yIG, int jungle) {
+	public void drawTextureRegion(float x1, float y1, float x2, float y2, float s1, float t1, float s2, float t2, float xIG, float yIG, int jungle) {
 		drawTextureRegion(x1, y1, x2, y2, s1, t1, s2, t2, new Color(1, 1, 1), xIG, yIG, jungle);
 	}
 
