@@ -3,7 +3,6 @@ package states;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
 import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_1;
 import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_2;
-
 import java.awt.Point;
 import java.nio.DoubleBuffer;
 
@@ -47,6 +46,9 @@ public class Test implements State {
 		map.renderObjects(camera, r);
 		player.render(r);
 
+		
+		
+		
 	}
 
 	
