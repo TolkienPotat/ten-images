@@ -126,17 +126,19 @@ public class Player extends Entity {
 		if(window.isKeyPressed(GLFW_KEY_W)) {
 			if (velY < maxVelocity) velY++;
 			direction = 3;
-		} 
+		}
+		
+		if(window.isKeyPressed(GLFW_KEY_S)) {
+			if (velY > -maxVelocity) velY--;
+			direction = 1;
+		}
 		
 		if(window.isKeyPressed(GLFW_KEY_A)) {
 			if (velX > -maxVelocity)velX--;
 			direction = 2;
 		} 
 		
-		if(window.isKeyPressed(GLFW_KEY_S)) {
-			if (velY > -maxVelocity) velY--;
-			direction = 1;
-		} 
+		
 		
 		if(window.isKeyPressed(GLFW_KEY_D)) {
 			if (velX < maxVelocity) velX++;
