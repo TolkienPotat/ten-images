@@ -6,6 +6,7 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_S;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.Rectangle;
 
 import rendering.Renderer;
@@ -129,7 +130,7 @@ public class Player extends Entity {
 		i.render(r);
 	}
 
-	public void input(Window window) {
+	public void input(Window window, Point mousePos) {
 
 		if (window.isKeyPressed(GLFW_KEY_W)) {
 			if (velY < maxVelocity)
@@ -155,7 +156,7 @@ public class Player extends Entity {
 			direction = 0;
 		}
 
-		i.input(window);
+		i.input(window, mousePos);
 	}
 
 	public void printCoords() {

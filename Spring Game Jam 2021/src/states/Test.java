@@ -76,11 +76,12 @@ public class Test implements State {
 		
 		mouse = window.isMouseDown(GLFW_MOUSE_BUTTON_1) + window.isMouseDown(GLFW_MOUSE_BUTTON_2)*2;
 		
-		
-		player.input(window);
-		
 		cursor = getCursor(window.id);
 		cursorInGame.setLocation(cursor.x + camera.x, cursor.y + camera.y);
+		
+		player.input(window, cursor);
+		
+		
 		
 		if (mouse == 1) {
 			player.swingObject();

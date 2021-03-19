@@ -3,6 +3,7 @@ package elements;
 import static org.lwjgl.glfw.GLFW.glfwGetCursorPos;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.nio.DoubleBuffer;
 
 import org.lwjgl.BufferUtils;
@@ -14,7 +15,7 @@ import window.Window;
 
 public class Inventory {
 
-	private double mouseX, mouseY;
+	Point mousePos;
 
 	private Item[] items = new Item[10];
 
@@ -24,12 +25,8 @@ public class Inventory {
 	
 	
 
-	public void input(Window w) {
-		DoubleBuffer posX = BufferUtils.createDoubleBuffer(1);
-		DoubleBuffer posY = BufferUtils.createDoubleBuffer(1);
-		glfwGetCursorPos(w.getID(), posX, posY);
-		mouseX = posX.get(0);
-		mouseY = posY.get(0);
+	public void input(Window w, Point mousePos) {
+		this.mousePos = mousePos;
 
 		if (w.isKeyPressed(GLFW.GLFW_KEY_E)) {
 			if (!toggle) {
