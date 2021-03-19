@@ -73,6 +73,7 @@ public class Jungle implements MapObject {
 
 		if (random.nextInt(growthRate) == 0 && stage < maxStage) {
 			stage++;
+			bounds.setBounds(x, y, texture[stage-1].getWidth() * scale, texture[stage-1].getHeight() * scale);
 			health = stage * 200;
 		}
 		

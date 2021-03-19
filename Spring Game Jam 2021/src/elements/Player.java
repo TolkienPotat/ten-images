@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 
+import matrixes.Vector2f;
 import rendering.Renderer;
 import rendering.Texture;
 import window.Window;
@@ -107,17 +108,17 @@ public class Player extends Entity {
 			case 0:
 				r.drawRotatedTexture(x + 13, y + 6, x + 13 + heldObject.getWidth() * heldObjectScale,
 						y + 6 + heldObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
-						-objectRotation);
+						-objectRotation, new Vector2f(x + 13, y + 6));
 				break;
 			case 1:
 				r.drawRotatedTexture(x + 30, y + 6, x + 30 + heldObject.getWidth() * heldObjectScale,
 						y + 6 + heldObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
-						-objectRotation);
+						-objectRotation, new Vector2f(x + 30, y + 6));
 				break;
 			case 2:
-				r.drawRotatedTexture(x - 16, y + 6, x - 16 + heldObject.getWidth() * heldObjectScale,
-						y + 6 + heldObject.getHeight() * heldObjectScale, 1, 0, 0, 1, drawColor, 0, 0, 0,
-						objectRotation);
+				r.drawRotatedTexture(x - 16, y + 10, x - 16 + heldObject.getWidth() * heldObjectScale,
+						y + 10 + heldObject.getHeight() * heldObjectScale, 1, 0, 0, 1, drawColor, 0, 0, 0,
+						objectRotation, new Vector2f(x, y + 10));
 
 				break;
 			case 3:
@@ -248,7 +249,7 @@ public class Player extends Entity {
 
 	public void swingObject() {
 
-		objectRotation += 10;
+		objectRotation += 9;
 		if (objectRotation > 90)
 			objectRotation = 0;
 

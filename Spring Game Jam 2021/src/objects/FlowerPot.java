@@ -14,7 +14,7 @@ public class FlowerPot implements MapObject {
 
 	int x, y;
 
-	int health = 120;
+	int health = 40;
 
 	public Texture texture;
 
@@ -23,6 +23,8 @@ public class FlowerPot implements MapObject {
 	MapObject heldObject;
 
 	int jungle = 0;
+	
+	int age = 0;
 
 	public FlowerPot() {
 		inGameX = 0;
@@ -42,7 +44,7 @@ public class FlowerPot implements MapObject {
 		}
 
 		if (heldObject != null) {
-			renderHeldObject(r);
+			renderHeldObject(r, c);
 		}
 
 		r.begin();
@@ -53,13 +55,13 @@ public class FlowerPot implements MapObject {
 
 	}
 
-	private void renderHeldObject(Renderer r) {
-
+	private void renderHeldObject(Renderer r, Camera c) {
+		heldObject.renderSized(r, 1, c);
 	}
 
 	@Override
 	public int tick(Point p, int mouse) {
-
+		age++;
 		if (bounds.contains(p) && mouse == 1) {
 
 			health--;
@@ -69,11 +71,13 @@ public class FlowerPot implements MapObject {
 			return 1;
 		}
 
-		if (bounds.contains(p) && mouse == 2) {
+		if (bounds.contains(p) && mouse == 2 && age > 10) {
 
-			
+			heldObject = new Tree(inGameX + 25, inGameY + 30);
 			
 		}
+		
+		if (heldObject != null) heldObject.setJungle(getJungle());
 
 		return 0;
 	}
