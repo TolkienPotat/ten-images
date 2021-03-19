@@ -41,15 +41,15 @@ public class Player extends Entity {
 
 	public Inventory i;
 
-	public Player(Texture t) {
+	public Player(Texture t, Window w) {
 
 		this.t = t;
 
-		initiate();
+		initiate(w);
 
 	}
 
-	public void initiate() {
+	public void initiate(Window w) {
 
 		screenRect = new Rectangle(x, y, x + t.getWidth(), y + t.getHeight());
 
@@ -58,7 +58,7 @@ public class Player extends Entity {
 
 		gameRect = new Rectangle(inGameX, inGameY, tWidth, tHeight);
 
-		i = new Inventory();
+		i = new Inventory(w);
 
 		heldObject = Texture.loadTexture("DefaultResources/Images/tool.png");
 	}

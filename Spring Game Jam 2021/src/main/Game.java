@@ -121,7 +121,7 @@ public class Game {
 	}
 
 	public void changeStates(String name) {
-		s.change(name);
+		s.change(name, mainWindow);
 	}
 
 	public void destroy() {

@@ -50,10 +50,10 @@ public class Test implements State {
 	
 	
 	@Override
-	public void init() {
+	public void init(Window w) {
 		map = new Map();
         map.loadMapFile("DefaultResources/Files/test-map.map", 200, 200);
-        player = new Player(Texture.loadTexture("DefaultResources/Images/GPlayer-Sheet.png"));
+        player = new Player(Texture.loadTexture("DefaultResources/Images/GPlayer-Sheet.png"), w);
         camera = new Camera(Math.floorDiv(startPos.x, 1920)*1920, Math.floorDiv(startPos.y, 1080)*1080);
         
         player.inGameX = startPos.x;
