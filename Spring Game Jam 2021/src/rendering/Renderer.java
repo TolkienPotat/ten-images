@@ -214,7 +214,7 @@ public class Renderer {
 		numVertices += 6;
 	}
 
-	public void drawRotatedTexture(float x1, float y1, float x2, float y2, float s1, float t1, float s2, float t2, Color c, float xIG, float yIG, int jungle, int degrees) {
+	public void drawRotatedTexture(float x1, float y1, float x2, float y2, float s1, float t1, float s2, float t2, Color c, float xIG, float yIG, int jungle, int degrees, Vector2f center) {
 		
 		
 		
@@ -222,24 +222,33 @@ public class Renderer {
 		Vector2f x1y2 = new Vector2f(x1, y2);
 		Vector2f x2y1 = new Vector2f(x2, y1);
 		Vector2f x2y2 = new Vector2f(x2, y2);
-		Vector2f center = new Vector2f(x1 + (x2 - x1)/2, y1 + (y2 - y1)/2);
+//		Vector2f center = new Vector2f(x1 + (x2 - x1)/2, y1 + (y2 - y1)/2);
 		
-		float radius = (float) Math.sqrt((Math.pow((x2y2.x - center.x), 2) + (Math.pow((x2y2.y - center.y), 2))));
+		float radius = (float) Math.abs(Math.sqrt((Math.pow((center.x - x1y1.x), 2) + (Math.pow((center.y - x1y1.y), 2)))));
 		
 		float sideX = (float) (radius * Math.cos(Math.toRadians(degrees - 135)));
 		float sideY = (float) (radius * Math.sin(Math.toRadians(degrees - 135)));
 		
 		x1y1 = new Vector2f(center.x + sideX, center.y + sideY);
 		
+		
+		radius = (float) Math.abs(Math.sqrt((Math.pow((center.x - x1y2.x), 2) + (Math.pow((x1y2.y - center.y), 2)))));
+		
 		sideX = (float) (radius * Math.cos(Math.toRadians(degrees - 225)));
 		sideY = (float) (radius * Math.sin(Math.toRadians(degrees - 225)));
 		
 		x1y2 = new Vector2f(center.x + sideX, center.y + sideY);
 		
+		
+		radius = (float) Math.abs(Math.sqrt((Math.pow((x2y1.x - center.x), 2) + (Math.pow((center.y - x2y1.y), 2)))));
+		
 		sideX = (float) (radius * Math.cos(Math.toRadians(degrees - 45)));
 		sideY = (float) (radius * Math.sin(Math.toRadians(degrees - 45)));
 		
 		x2y1 = new Vector2f(center.x + sideX, center.y + sideY);
+		
+		
+		radius = (float) Math.abs(Math.sqrt((Math.pow((x2y2.x - center.x), 2) + (Math.pow((x2y2.y - center.y), 2)))));
 		
 		sideX = (float) (radius * Math.cos(Math.toRadians(degrees - 315)));
 		sideY = (float) (radius * Math.sin(Math.toRadians(degrees - 315)));
