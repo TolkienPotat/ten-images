@@ -21,7 +21,7 @@ public class EmptyState implements State{
 	}
 
 	@Override
-	public void init() {
+	public void init(Window w) {
 		
 	}
 

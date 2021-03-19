@@ -9,7 +9,7 @@ public interface State {
 	
 	public void render(Renderer r);
 	
-	public void init();
+	public void init(Window w);
 	
 	public void exit();
 

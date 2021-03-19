@@ -25,10 +25,10 @@ public class StateMachine implements State{
 		states.put(name, state);
 	}
 	
-	public void change(String name) {
+	public void change(String name, Window w) {
 		currentState.exit();
 		currentState = states.get(name);
-		currentState.init();
+		currentState.init(w);
 	}
 
 	
@@ -43,8 +43,8 @@ public class StateMachine implements State{
 	}
 
 	@Override
-	public void init() {
-		currentState.init();
+	public void init(Window w) {
+		currentState.init(w);
 	}
 
 	@Override
