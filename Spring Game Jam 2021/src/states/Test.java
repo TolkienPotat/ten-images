@@ -3,6 +3,7 @@ package states;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
 import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_1;
 import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_2;
+
 import java.awt.Point;
 import java.nio.DoubleBuffer;
 
@@ -13,6 +14,7 @@ import elements.Camera;
 import elements.Map;
 import elements.Player;
 import main.Launcher;
+import objects.FlowerPot;
 import objects.Jungle;
 import rendering.Renderer;
 import rendering.Texture;
@@ -80,6 +82,18 @@ public class Test implements State {
 		cursor = getCursor(window.id);
 		cursorInGame.setLocation(cursor.x + camera.x, cursor.y + camera.y);
 		
+		if (mouse == 1) {
+			player.swingObject();
+			player.isSwingingObject = true;
+		} else {
+			player.objectRotation = 0;
+			player.isSwingingObject = false;
+		}
+		
+		if (mouse == 2 && map.getObject(cursorInGame.x, cursorInGame.y) == null) {
+			map.addObject(new FlowerPot(), cursorInGame.x, cursorInGame.y);
+		}
+		
 	}
 
 	@Override
@@ -98,9 +112,6 @@ public class Test implements State {
 		map.tickTiles(cursorInGame, mouse);
 
 		
-		if (mouse == 1) {
-			swingObject();
-		}
 		
 		if (player.x  >= 1920 - player.t.getWidth() +1) {
 			camera.moveRight();
@@ -133,10 +144,6 @@ public class Test implements State {
 
 	}
 	
-	public void swingObject() {
-		
-		
-		
-	}
+	
 	
 }

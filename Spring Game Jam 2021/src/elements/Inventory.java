@@ -21,6 +21,8 @@ public class Inventory {
 	private boolean toggle;
 
 	private Player p;
+	
+	
 
 	public void input(Window w) {
 		DoubleBuffer posX = BufferUtils.createDoubleBuffer(1);
@@ -40,6 +42,8 @@ public class Inventory {
 
 	public void tick(Player parent) {
 		p = parent;
+		
+		
 	}
 
 	public void render(Renderer r) {

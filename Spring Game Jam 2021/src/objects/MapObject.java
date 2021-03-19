@@ -23,6 +23,8 @@ public interface MapObject {
 	public Texture getTexture();
 
 
+	public void renderSized(Renderer r, int sizeModifier, Camera c);
+	
 
 	int tick(Point p, int mouse);
 	

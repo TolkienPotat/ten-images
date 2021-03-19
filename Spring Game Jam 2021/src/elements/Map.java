@@ -242,5 +242,15 @@ public class Map {
 		scaledTileSize = texture[0].getWidth() * scale;
 		
 	}
+	
+	public MapObject getObject(int xInGame, int yInGame) {
+		
+		try {
+			return tiles[Math.floorDiv(xInGame, scaledTileSize)][Math.floorDiv(yInGame, scaledTileSize)].object;
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return null;
+		}
+		
+	}
 
 }

@@ -115,4 +115,8 @@ public class Jungle implements MapObject {
 		return texture[stage - 1];
 	}
 
+	@Override
+	public void renderSized(Renderer r, int sizeModifier, Camera c) {
+	}
+
 }
