@@ -98,4 +98,15 @@ public class Tree implements MapObject {
 		return texture;
 	}
 
+	@Override
+	public void renderSized(Renderer r, int sizeModifier, Camera c) {
+		x = inGameX - c.x;
+		y = inGameY - c.y;
+		r.begin();
+		texture.bind();
+		r.drawCustomTextureRegion(texture, x, y, 0, 0, texture.getWidth() * sizeModifier, texture.getHeight() * sizeModifier,
+				new Color(1, 1, 1), inGameX, inGameY, jungle);
+		r.end();
+	}
+
 }
