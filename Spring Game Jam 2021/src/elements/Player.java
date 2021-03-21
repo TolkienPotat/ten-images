@@ -105,31 +105,31 @@ public class Player extends Entity {
 
 		
 		
-//		if (isSwingingObject) {
-//			switch (direction) {
-//			case 0:
-//				r.drawRotatedTexture(x + 13, y + 6, x + 13 + heldObject.getWidth() * heldObjectScale,
-//						y + 6 + heldObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
-//						-objectRotation, new Vector2f(x + 13, y + 6));
-//				break;
-//			case 1:
-//				r.drawRotatedTexture(x + 30, y + 6, x + 30 + heldObject.getWidth() * heldObjectScale,
-//						y + 6 + heldObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
-//						-objectRotation, new Vector2f(x + 30, y + 6));
-//				break;
-//			case 2:
-//				r.drawRotatedTexture(x - 16, y + 10, x - 16 + heldObject.getWidth() * heldObjectScale,
-//						y + 10 + heldObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
-//						objectRotation, new Vector2f(x - 16 + heldObject.getWidth() * heldObjectScale, y + 10));
-//
-//				break;
-//			case 3:
-//				r.drawRotatedTexture(x - 16, y + 6, x - 16 + heldObject.getWidth() * heldObjectScale,
-//						y + 6 + heldObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
-//						objectRotation, new Vector2f(x - 16 + heldObject.getWidth() * heldObjectScale, y + 6));
-//				break;
-//			}
-//		}
+		if (isSwingingObject) {
+			switch (direction) {
+			case 0:
+				r.drawRotatedTexture(x + 13, y + 6, x + 13 + heldObject.getWidth() * heldObjectScale,
+						y + 6 + heldObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
+						-objectRotation, new Vector2f(x + 13, y + 6));
+				break;
+			case 1:
+				r.drawRotatedTexture(x + 30, y + 6, x + 30 + heldObject.getWidth() * heldObjectScale,
+						y + 6 + heldObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
+						-objectRotation, new Vector2f(x + 30, y + 6));
+				break;
+			case 2:
+				r.drawRotatedTexture(x - 16, y + 10, x - 16 + heldObject.getWidth() * heldObjectScale,
+						y + 10 + heldObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
+						objectRotation, new Vector2f(x - 16 + heldObject.getWidth() * heldObjectScale, y + 10));
+
+				break;
+			case 3:
+				r.drawRotatedTexture(x - 16, y + 6, x - 16 + heldObject.getWidth() * heldObjectScale,
+						y + 6 + heldObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
+						objectRotation, new Vector2f(x - 16 + heldObject.getWidth() * heldObjectScale, y + 6));
+				break;
+			}
+		}
 		r.end();
 
 		i.render(r);
