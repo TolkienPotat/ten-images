@@ -103,6 +103,8 @@ public class Player extends Entity {
 		r.begin();
 		heldObject.bind();
 
+		
+		
 		if (isSwingingObject) {
 			switch (direction) {
 			case 0:
@@ -117,12 +119,14 @@ public class Player extends Entity {
 				break;
 			case 2:
 				r.drawRotatedTexture(x - 16, y + 10, x - 16 + heldObject.getWidth() * heldObjectScale,
-						y + 10 + heldObject.getHeight() * heldObjectScale, 1, 0, 0, 1, drawColor, 0, 0, 0,
-						objectRotation, new Vector2f(x, y + 10));
+						y + 10 + heldObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
+						objectRotation, new Vector2f(x - 16 + heldObject.getWidth() * heldObjectScale, y + 10));
 
 				break;
 			case 3:
-				
+				r.drawRotatedTexture(x - 16, y + 6, x - 16 + heldObject.getWidth() * heldObjectScale,
+						y + 6 + heldObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
+						objectRotation, new Vector2f(x - 16 + heldObject.getWidth() * heldObjectScale, y + 6));
 				break;
 			}
 		}
