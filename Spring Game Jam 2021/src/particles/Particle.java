@@ -68,8 +68,8 @@ public class Particle {
 
 		r.begin();
 		t.bind();
-		r.drawRotatedTexture(x, y, x + particleSize, y + particleSize, drawX, drawY, drawX2, drawY2, color, inGameX,
-				inGameY, jungle, rotation, new Vector2f(x + particleSize/2, y + particleSize/2));
+		r.drawCentrallyRotatedTexture(x, y, x + particleSize, y + particleSize, drawX, drawY, drawX2, drawY2, color, inGameX,
+				inGameY, jungle, rotation);
 		r.end();
 	}
 
