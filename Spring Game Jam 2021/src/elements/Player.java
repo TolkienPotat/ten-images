@@ -118,15 +118,15 @@ public class Player extends Entity {
 						-objectRotation, new Vector2f(x + 30, y + 6));
 				break;
 			case 2:
-				r.drawRotatedTexture(x - 16, y + 10, x - 16 + heldObject.getWidth() * heldObjectScale,
+				r.drawRotatedTexture(x + 10, y + 10, x + 10 - heldObject.getWidth() * heldObjectScale,
 						y + 10 + heldObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
-						objectRotation, new Vector2f(x - 16 + heldObject.getWidth() * heldObjectScale, y + 10));
+						objectRotation, new Vector2f(x + 10, y + 10));
 
 				break;
 			case 3:
-				r.drawRotatedTexture(x - 16, y + 6, x - 16 + heldObject.getWidth() * heldObjectScale,
-						y + 6 + heldObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
-						objectRotation, new Vector2f(x - 16 + heldObject.getWidth() * heldObjectScale, y + 6));
+				r.drawRotatedTexture(x , y + 8, x- heldObject.getWidth() * heldObjectScale,
+						y + 8 + heldObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
+						objectRotation, new Vector2f(x , y + 8));
 				break;
 			}
 		}

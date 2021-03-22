@@ -44,7 +44,7 @@ public class ParticleHandler {
 	}
 	
 	public void render(Renderer r, Camera c) {
-//		System.out.println(particles.size());
+
 		for (int i = 0; i < particles.size(); i++) {
 			
 			particles.get(i).render(r, c);

@@ -225,33 +225,33 @@ public class Renderer {
 //		Vector2f center = new Vector2f(x1 + (x2 - x1)/2, y1 + (y2 - y1)/2);
 		
 		float radius = (float) Math.abs(Math.sqrt((Math.pow((center.x - x1y1.x), 2) + (Math.pow((center.y - x1y1.y), 2)))));
-		System.out.println(Math.toDegrees(Math.atan2(center.x - x1y1.x, center.y - x1y1.y)) + " " + Math.toDegrees(Math.atan2(center.x - x2y2.x, center.y - x2y2.y)));
-		float sideX = (float) (radius * Math.cos(Math.toRadians(degrees - 90 - Math.toDegrees(Math.atan2(center.x - x1y1.x, center.y - x1y1.y)))));
-		float sideY = (float) (radius * Math.sin(Math.toRadians(degrees - 90 - Math.toDegrees(Math.atan2(center.x - x1y1.x, center.y - x1y1.y)))));
+
+		float sideX = (float) (radius * Math.cos(Math.toRadians(degrees +90 -Math.toDegrees(Math.atan2(center.x - x1y1.x, center.y - x1y1.y)))));
+		float sideY = (float) (radius * Math.sin(Math.toRadians(degrees +90 -Math.toDegrees(Math.atan2(center.x - x1y1.x, center.y - x1y1.y)))));
 		
 		x1y1 = new Vector2f(center.x + sideX, center.y + sideY);
 		
 		
 		radius = (float) Math.abs(Math.sqrt((Math.pow((center.x - x1y2.x), 2) + (Math.pow((x1y2.y - center.y), 2)))));
 		
-		sideX = (float) (radius * Math.cos(Math.toRadians(degrees - 90 -Math.toDegrees(Math.atan2(center.x - x1y2.x, x1y2.y - center.y)))));
-		sideY = (float) (radius * Math.sin(Math.toRadians(degrees - 90 -Math.toDegrees(Math.atan2(center.x - x1y2.x, x1y2.y - center.y)))));
+		sideX = (float) (radius * Math.cos(Math.toRadians(degrees +90 -Math.toDegrees(Math.atan2(center.x - x1y2.x, x1y2.y - center.y)))));
+		sideY = (float) (radius * Math.sin(Math.toRadians(degrees +90 -Math.toDegrees(Math.atan2(center.x - x1y2.x, x1y2.y - center.y)))));
 		
 		x1y2 = new Vector2f(center.x + sideX, center.y + sideY);
 		
 		
 		radius = (float) Math.abs(Math.sqrt((Math.pow((x2y1.x - center.x), 2) + (Math.pow((center.y - x2y1.y), 2)))));
 		
-		sideX = (float) (radius * Math.cos(Math.toRadians(degrees - 90 -Math.toDegrees(Math.atan2(x2y1.x - center.x, center.y - x2y1.y)))));
-		sideY = (float) (radius * Math.sin(Math.toRadians(degrees - 90 -Math.toDegrees(Math.atan2(x2y1.x - center.x, center.y - x2y1.y)))));
+		sideX = (float) (radius * Math.cos(Math.toRadians(degrees +90 -Math.toDegrees(Math.atan2(x2y1.x - center.x, center.y - x2y1.y)))));
+		sideY = (float) (radius * Math.sin(Math.toRadians(degrees +90 -Math.toDegrees(Math.atan2(x2y1.x - center.x, center.y - x2y1.y)))));
 		
 		x2y1 = new Vector2f(center.x + sideX, center.y + sideY);
 		
 		
 		radius = (float) Math.abs(Math.sqrt((Math.pow((x2y2.x - center.x), 2) + (Math.pow((x2y2.y - center.y), 2)))));
 	
-		sideX = (float) (radius * Math.cos(Math.toRadians(degrees - 90 - Math.toDegrees(Math.atan2(x2y2.x - center.x, x2y2.y - center.y)))));
-		sideY = (float) (radius * Math.sin(Math.toRadians(degrees - 90 - Math.toDegrees(Math.atan2(x2y2.x - center.x, x2y2.y - center.y)))));
+		sideX = (float) (radius * Math.cos(Math.toRadians(degrees +90 - Math.toDegrees(Math.atan2(x2y2.x - center.x, x2y2.y - center.y)))));
+		sideY = (float) (radius * Math.sin(Math.toRadians(degrees +90 - Math.toDegrees(Math.atan2(x2y2.x - center.x, x2y2.y - center.y)))));
 		
 		x2y2 = new Vector2f(center.x + sideX, center.y + sideY);
 		
@@ -264,7 +264,7 @@ public class Renderer {
 		float g = c.getGreen();
 		float b = c.getBlue();
 		float a = c.getAlpha();
-		System.out.println(x1y1.x + " " + x1y1.y + " " + x1y2.x + " " + x1y2.y + " " + x2y1.x + " " + x2y1.y + " " + x2y2.x + " " + x2y2.y + " ");
+		
 		vertices.put(x1y1.x).put(x1y1.y).put(r).put(g).put(b).put(a).put(s1).put(t1).put(xIG + s1 * 40).put(yIG + t1 * 40).put(jungle);
 		vertices.put(x1y2.x).put(x1y2.y).put(r).put(g).put(b).put(a).put(s1).put(t2).put(xIG + s1 * 40).put(yIG + t2 * 40).put(jungle);
 		vertices.put(x2y2.x).put(x2y2.y).put(r).put(g).put(b).put(a).put(s2).put(t2).put(xIG + s2 * 40).put(yIG + t2 * 40).put(jungle);
@@ -328,7 +328,7 @@ public void drawCentrallyRotatedTexture(float x1, float y1, float x2, float y2, 
 		float g = c.getGreen();
 		float b = c.getBlue();
 		float a = c.getAlpha();
-		System.out.println(x1y1.x + " " + x1y1.y + " " + x1y2.x + " " + x1y2.y + " " + x2y1.x + " " + x2y1.y + " " + x2y2.x + " " + x2y2.y + " ");
+		
 		vertices.put(x1y1.x).put(x1y1.y).put(r).put(g).put(b).put(a).put(s1).put(t1).put(xIG + s1 * 40).put(yIG + t1 * 40).put(jungle);
 		vertices.put(x1y2.x).put(x1y2.y).put(r).put(g).put(b).put(a).put(s1).put(t2).put(xIG + s1 * 40).put(yIG + t2 * 40).put(jungle);
 		vertices.put(x2y2.x).put(x2y2.y).put(r).put(g).put(b).put(a).put(s2).put(t2).put(xIG + s2 * 40).put(yIG + t2 * 40).put(jungle);

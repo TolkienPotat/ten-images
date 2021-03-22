@@ -61,10 +61,11 @@ public class Jungle implements MapObject {
 
 	@Override
 	public int tick(Point p, int mouse) {
-
+		
 		if (bounds.contains(p) && mouse == 1) {
 
 			health--;
+			
 			if (health <= 0) {
 				return -1;
 			}
@@ -73,7 +74,8 @@ public class Jungle implements MapObject {
 
 		if (random.nextInt(growthRate) == 0 && stage < maxStage) {
 			stage++;
-			bounds.setBounds(x, y, texture[stage-1].getWidth() * scale, texture[stage-1].getHeight() * scale);
+			bounds.setBounds(inGameX, inGameY, texture[stage-1].getWidth() * scale, texture[stage-1].getHeight() * scale);
+			
 			health = stage * 200;
 		}
 		

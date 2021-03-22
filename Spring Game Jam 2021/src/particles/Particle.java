@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.util.Random;
 
 import elements.Camera;
-import matrixes.Vector2f;
 import rendering.Renderer;
 import rendering.Texture;
 
