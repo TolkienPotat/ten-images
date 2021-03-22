@@ -48,7 +48,7 @@ public class Tile {
 		}
 
 		
-//		jungle = object.getJungle() - 1;
+
 		int i = object.tick(p, mouse);
 		if (i == -1) {
 			shouldKillObject = true;
