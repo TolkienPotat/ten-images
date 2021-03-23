@@ -224,7 +224,7 @@ public class Renderer {
 		Vector2f x2y2 = new Vector2f(x2, y2);
 //		Vector2f center = new Vector2f(x1 + (x2 - x1)/2, y1 + (y2 - y1)/2);
 		
-		float radius = (float) Math.abs(Math.sqrt((Math.pow((center.x - x1y1.x), 2) + (Math.pow((center.y - x1y1.y), 2)))));
+		float radius = (float) Math.abs(Math.sqrt(((center.x - x1y1.x)*(center.x - x1y1.x)) + ((center.y - x1y1.y) * (center.y - x1y1.y))));
 
 		float sideX = (float) (radius * Math.cos(Math.toRadians(degrees +90 -Math.toDegrees(Math.atan2(center.x - x1y1.x, center.y - x1y1.y)))));
 		float sideY = (float) (radius * Math.sin(Math.toRadians(degrees +90 -Math.toDegrees(Math.atan2(center.x - x1y1.x, center.y - x1y1.y)))));
@@ -232,7 +232,7 @@ public class Renderer {
 		x1y1 = new Vector2f(center.x + sideX, center.y + sideY);
 		
 		
-		radius = (float) Math.abs(Math.sqrt((Math.pow((center.x - x1y2.x), 2) + (Math.pow((x1y2.y - center.y), 2)))));
+		radius = (float) Math.abs(Math.sqrt(((center.x - x1y2.x)*(center.x - x1y2.x)) + ((center.y - x1y2.y) * (center.y - x1y2.y))));
 		
 		sideX = (float) (radius * Math.cos(Math.toRadians(degrees +90 -Math.toDegrees(Math.atan2(center.x - x1y2.x, x1y2.y - center.y)))));
 		sideY = (float) (radius * Math.sin(Math.toRadians(degrees +90 -Math.toDegrees(Math.atan2(center.x - x1y2.x, x1y2.y - center.y)))));
@@ -240,7 +240,7 @@ public class Renderer {
 		x1y2 = new Vector2f(center.x + sideX, center.y + sideY);
 		
 		
-		radius = (float) Math.abs(Math.sqrt((Math.pow((x2y1.x - center.x), 2) + (Math.pow((center.y - x2y1.y), 2)))));
+		radius = (float) Math.abs(Math.sqrt(((center.x - x2y1.x)*(center.x - x2y1.x)) + ((center.y - x2y1.y) * (center.y - x2y1.y))));
 		
 		sideX = (float) (radius * Math.cos(Math.toRadians(degrees +90 -Math.toDegrees(Math.atan2(x2y1.x - center.x, center.y - x2y1.y)))));
 		sideY = (float) (radius * Math.sin(Math.toRadians(degrees +90 -Math.toDegrees(Math.atan2(x2y1.x - center.x, center.y - x2y1.y)))));
@@ -248,7 +248,7 @@ public class Renderer {
 		x2y1 = new Vector2f(center.x + sideX, center.y + sideY);
 		
 		
-		radius = (float) Math.abs(Math.sqrt((Math.pow((x2y2.x - center.x), 2) + (Math.pow((x2y2.y - center.y), 2)))));
+		radius = (float) Math.abs(Math.sqrt(((center.x - x2y2.x)*(center.x - x2y2.x)) + ((center.y - x2y2.y) * (center.y - x2y2.y))));
 	
 		sideX = (float) (radius * Math.cos(Math.toRadians(degrees +90 - Math.toDegrees(Math.atan2(x2y2.x - center.x, x2y2.y - center.y)))));
 		sideY = (float) (radius * Math.sin(Math.toRadians(degrees +90 - Math.toDegrees(Math.atan2(x2y2.x - center.x, x2y2.y - center.y)))));
