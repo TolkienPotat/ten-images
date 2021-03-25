@@ -39,6 +39,7 @@ public class Inventory {
 	}
 
 	public void init() {
+		//test code
 		addItem ( new Item ( Texture. loadTexture ( "DefaultResources/Images/pLAYER.png" ) ) ) ;
 		addItem ( new Item ( Texture. loadTexture ( "DefaultResources/Images/pLAYER.png" ) ) ) ;
 		addItem ( new Item ( Texture. loadTexture ( "DefaultResources/Images/pLAYER.png" ) ) ) ;
