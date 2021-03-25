@@ -258,5 +258,9 @@ public class Player extends Entity {
 			objectRotation = 0;
 
 	}
+	
+	public void addToInventory(Item item) {
+		i.addItem(item);
+	}
 
 }

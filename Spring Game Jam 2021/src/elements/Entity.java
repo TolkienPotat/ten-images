@@ -16,7 +16,7 @@ public class Entity {
 	public float velX, velY;
 	
 	Rectangle screenRect;
-	Rectangle gameRect;
+	public Rectangle gameRect;
 	
 	public Entity() {
 		

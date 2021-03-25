@@ -2,6 +2,7 @@ package elements;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Random;
@@ -276,6 +277,10 @@ public class Map {
 			return null;
 		}
 		
+	}
+	
+	public Item pickUpItem(Rectangle r) {
+		return mapItems.TakeClosestItem(r);
 	}
 
 }
