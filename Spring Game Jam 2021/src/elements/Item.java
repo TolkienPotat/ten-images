@@ -17,6 +17,8 @@ public class Item {
 	
 	Texture t;
 	
+	public int stack;
+	
 	public Rectangle rect;
 	
 	public Item(Texture texture) {
