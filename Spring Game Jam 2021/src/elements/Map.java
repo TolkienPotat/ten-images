@@ -32,6 +32,8 @@ public class Map {
 	
 	public ParticleHandler particle;
 	
+	public MapItemHandler mapItems;
+	
 	
 	Random random;
 	
@@ -44,6 +46,8 @@ public class Map {
 		random = new Random();
 		
 		particle = new ParticleHandler();
+		
+		mapItems = new MapItemHandler();
 		
 	}
 
@@ -100,7 +104,23 @@ public class Map {
 		
 	}
 
-	public void render(Camera c, Renderer renderer) {
+	public void tick(Point mousePos, int mouseButtons, Player player) {
+		tickTiles(mousePos, mouseButtons);
+		tickMapItems(player);
+	}
+	
+	public void render(Camera c, Renderer renderer) { 
+		renderTiles(c, renderer);
+		renderParticles(c, renderer);
+		renderObjects(c, renderer);
+		renderMapItems(c, renderer);
+	}
+	
+	public void renderMapItems(Camera c, Renderer r) {
+		mapItems.render(r, c);
+	}
+	
+	public void renderTiles(Camera c, Renderer renderer) {
 		for (int i = 0; i < xTiles; i++) {
 			for (int j = 0; j < yTiles; j++) {
 				
@@ -122,7 +142,7 @@ public class Map {
 				
 				
 				
-				
+			
 				
 			}
 		}
@@ -175,11 +195,11 @@ public class Map {
 				if (t == 1 && random.nextInt(5) == 0) {
 					
 					particle.add(tiles[i][j].getObjectTexture(), i*scaledTileSize, j*scaledTileSize, tiles[i][j].getObjectTexture().getWidth() * MapObject.scale, tiles[i][j].getObjectTexture().getHeight() * MapObject.scale, tiles[i][j].getJungle(), 1);
-					
+					mouseButtons = 0;
 				} else if (t == -1) {
 					
 					particle.add(tiles[i][j].getObjectTexture(), i*scaledTileSize, j*scaledTileSize, tiles[i][j].getObjectTexture().getWidth() * MapObject.scale, tiles[i][j].getObjectTexture().getHeight() * MapObject.scale, tiles[i][j].getJungle(), 50);
-
+					mouseButtons = 0;
 					
 				}
 				
@@ -190,6 +210,11 @@ public class Map {
 			}
 		}
 		particle.tick();
+	}
+	
+	public void tickMapItems(Player player) {
+		mapItems.tick(player);
+		mapItems.addItem(new TreeSeeds(6500, 6500));
 	}
 	
 	
