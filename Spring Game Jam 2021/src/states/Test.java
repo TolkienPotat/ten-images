@@ -11,6 +11,7 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFW;
 
 import elements.Camera;
+import elements.Item;
 import elements.Map;
 import elements.Player;
 import main.Launcher;
@@ -100,7 +101,12 @@ public class Test implements State {
 	public void tick() {
 		player.tick(camera, map);
 		
+		map.tick(cursorInGame, mouse, player);
 		
+		Item i = map.pickUpItem(player.gameRect);
+		if (i!= null) {
+			player.addToInventory(i);
+		}
 		
 		if (camera.moving) {
 			camera.move();
@@ -109,7 +115,7 @@ public class Test implements State {
 
 		
 		
-		map.tick(cursorInGame, mouse, player);
+		
 
 		
 		

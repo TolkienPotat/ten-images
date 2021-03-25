@@ -1,5 +1,7 @@
 package elements;
 
+import java.awt.Rectangle;
+
 import rendering.Renderer;
 import rendering.Texture;
 
@@ -15,6 +17,8 @@ public class Item {
 	
 	Texture t;
 	
+	public Rectangle rect;
+	
 	public Item(Texture texture) {
 		t = texture;
 		contained = true;
@@ -27,6 +31,8 @@ public class Item {
 		this.inGameX = inGameX;
 		xVel = 0;
 		yVel = 0;
+		
+		rect = new Rectangle(inGameX, inGameY, texture.getWidth(), texture.getHeight());
 	}
 	
 	public void tick(Player player) {
@@ -48,6 +54,7 @@ public class Item {
 			
 			inGameX += xVel;
 			inGameY += yVel;
+			rect.setLocation(inGameX, inGameY);
 		}
 		
 	}

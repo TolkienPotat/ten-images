@@ -1,6 +1,6 @@
 package elements;
 
-import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import rendering.Renderer;
@@ -49,6 +49,17 @@ public class MapItemHandler {
 		}
 	}
 	
-	
+	public Item TakeClosestItem(Rectangle r) {
+		for (int i = 0; i < items.size(); i++) {
+			if (items.get(i).rect.intersects(r)) {
+				
+				Item item = items.get(i);
+				items.remove(i);
+				return item;
+				
+			}
+		}
+		return null;
+	}
 	
 }
