@@ -9,18 +9,19 @@ import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.opengl.GL30;
 
 import rendering.Renderer;
+import rendering.Texture;
 import window.Window;
 
 public class Inventory {
 
 	Point mousePos;
 
-	ArrayList items = new ArrayList();
-	
+	ArrayList<Item> items = new ArrayList<Item>();
+
 	private Player p;
-	
+
 	private GLFWKeyCallback keyCallback = new GLFWKeyCallback() {
-		
+
 		@Override
 		public void invoke(long window, int key, int scancode, int action, int mods) {
 			if (key == GLFW.GLFW_KEY_E && action == GLFW.GLFW_PRESS) {
@@ -28,21 +29,33 @@ public class Inventory {
 			}
 		}
 	};
-	
+
 	private boolean toggle;
-	
+
 	public Inventory(Window w) {
 		GLFW.glfwSetKeyCallback(w.getID(), keyCallback);
+
+		init();
+	}
+
+	public void init() {
+		addItem ( new Item ( Texture. loadTexture ( "DefaultResources/Images/pLAYER.png" ) ) ) ;
+		addItem ( new Item ( Texture. loadTexture ( "DefaultResources/Images/pLAYER.png" ) ) ) ;
+		addItem ( new Item ( Texture. loadTexture ( "DefaultResources/Images/pLAYER.png" ) ) ) ;
+		addItem ( new Item ( Texture. loadTexture ( "DefaultResources/Images/pLAYER.png" ) ) ) ;
+		addItem ( new Item ( Texture. loadTexture ( "DefaultResources/Images/pLAYER.png" ) ) ) ;
+		addItem ( new Item ( Texture. loadTexture ( "DefaultResources/Images/pLAYER.png" ) ) ) ;
+		addItem ( new Item ( Texture. loadTexture ( "DefaultResources/Images/pLAYER.png" ) ) ) ;
+
 	}
 
 	public void input(Window w, Point mousePos) {
 		this.mousePos = mousePos;
-		
-		
+
 	}
-	
+
 	public void addItem(Item i) {
-		
+		items.add(i);
 	}
 
 	public void tick(Player parent) {
@@ -55,10 +68,19 @@ public class Inventory {
 			r.begin();
 
 			GL30.glBindTexture(GL30.GL_TEXTURE_2D, 1);
-			r.drawTextureRegion(p.x + 32, p.y + 32, p.x + 128, p.y + 64, 0, 0, 1, 1, new Color(207, 211, 193), p.inGameX,
-					p.inGameY, 0);
+			r.drawTextureRegion(p.x, p.y + 32, p.x + (16 * items.size()), p.y + 48, 0, 0, 1, 1,
+					new Color(209, 179, 255), p.inGameX, p.inGameY, 0);
 
 			r.end();
+
+			for (int i = 0; i < items.size(); i++) {
+				Item item = items.get(i);
+				
+				r.begin();
+				item.t.bind();
+				r.drawTexture(item.t, p.x + (16 * i), p.y + 32, p.inGameX, p.inGameY);
+				r.end();
+			}
 		}
 	}
 }
