@@ -68,7 +68,7 @@ public class Renderer {
 		flush();
 	}
 
-	public static void flush() {
+	public void flush() {
 		if (numVertices > 0) {
 			vertices.flip();
 
