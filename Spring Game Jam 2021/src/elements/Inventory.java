@@ -72,7 +72,7 @@ public class Inventory {
 			}
 		} else items.add(i);
     
-    items.get(items.size() - 1).rect.setBounds(p.x + 16 * (items.size() - 1), p.y + 32, 16, 16);
+
 
 	}
 
@@ -92,13 +92,7 @@ public class Inventory {
 
 	public void render(Renderer r) {
 		if (toggle) {
-//			r.begin();
-//
-//			GL30.glBindTexture(GL30.GL_TEXTURE_2D, 1);
-//			r.drawTextureRegion(p.x, p.y + 32, p.x + (16 * items.size()), p.y + 48, 0, 0, 1, 1,
-//					new Color(209, 179, 255), p.inGameX, p.inGameY, 0);
-//
-//			r.end();
+
 
 			for (int i = 0; i < items.size(); i++) {
 				Item item = items.get(i);
