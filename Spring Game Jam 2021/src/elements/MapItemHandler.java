@@ -1,5 +1,6 @@
 package elements;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
@@ -37,9 +38,9 @@ public class MapItemHandler {
 		
 	}
 	
-	public void tick(Player player) {
+	public void tick(Player player, Point mousePos, int mouseButtons) {
 		for (int i = 0; i < items.size(); i++) {
-			items.get(i).tick(player);
+			items.get(i).tick(player, mousePos, mouseButtons);
 		}
 	}
 	
