@@ -55,8 +55,7 @@ public class Inventory {
 				if (item.getClass() == i.getClass()) {
 					item.stack++;
 				} else {
-					items.add(i);
-					break;
+					continue;
 				}
 			}
 		} else items.add(i);
