@@ -26,12 +26,12 @@ public class Player extends Entity {
 	int direction = 1;
 	float tcX, tcY;
 	// test
-	public Texture heldObject;
+	public Texture heldMainHandObject;
 	int heldObjectScale = 3;
 
 	public int objectRotation = 0;
 
-	public boolean isSwingingObject = false;
+	public int swingingObject = 0;
 
 	Color drawColor = new Color(1, 1, 1);
 
@@ -60,7 +60,7 @@ public class Player extends Entity {
 
 		i = new Inventory(w);
 
-		heldObject = Texture.loadTexture("DefaultResources/Images/tool.png");
+		heldMainHandObject = Texture.loadTexture("DefaultResources/Images/tool.png");
 	}
 
 	public void tick(Camera camera, Map map) {
@@ -101,31 +101,60 @@ public class Player extends Entity {
 		r.end();
 
 		r.begin();
-		heldObject.bind();
+		
 
 		
 		
-		if (isSwingingObject) {
+		if (swingingObject == 1) {
+			heldMainHandObject.bind();
 			switch (direction) {
 			case 0:
-				r.drawRotatedTexture(x + 13, y + 6, x + 13 + heldObject.getWidth() * heldObjectScale,
-						y + 6 + heldObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
+				r.drawRotatedTexture(x + 13, y + 6, x + 13 + heldMainHandObject.getWidth() * heldObjectScale,
+						y + 6 + heldMainHandObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
 						-objectRotation, new Vector2f(x + 13, y + 6));
 				break;
 			case 1:
-				r.drawRotatedTexture(x + 30, y + 6, x + 30 + heldObject.getWidth() * heldObjectScale,
-						y + 6 + heldObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
+				r.drawRotatedTexture(x + 30, y + 6, x + 30 + heldMainHandObject.getWidth() * heldObjectScale,
+						y + 6 + heldMainHandObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
 						-objectRotation, new Vector2f(x + 30, y + 6));
 				break;
 			case 2:
-				r.drawRotatedTexture(x + 10, y + 10, x + 10 - heldObject.getWidth() * heldObjectScale,
-						y + 10 + heldObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
+				r.drawRotatedTexture(x + 10, y + 10, x + 10 - heldMainHandObject.getWidth() * heldObjectScale,
+						y + 10 + heldMainHandObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
 						objectRotation, new Vector2f(x + 10, y + 10));
 
 				break;
 			case 3:
-				r.drawRotatedTexture(x , y + 8, x- heldObject.getWidth() * heldObjectScale,
-						y + 8 + heldObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
+				r.drawRotatedTexture(x , y + 8, x- heldMainHandObject.getWidth() * heldObjectScale,
+						y + 8 + heldMainHandObject.getHeight() * heldObjectScale, 0, 0, 1, 1, drawColor, 0, 0, 0,
+						objectRotation, new Vector2f(x , y + 8));
+				break;
+			}
+		} else if (swingingObject == 2 && i.selectedItemPosition >= 0) {
+			
+			i.items.get(i.selectedItemPosition).t.bind();
+			int width = i.items.get(i.selectedItemPosition).t.getWidth();
+			int height = i.items.get(i.selectedItemPosition).t.getHeight();
+			switch (direction) {
+			case 0:
+				r.drawRotatedTexture(x + 13, y + 6, x + 13 + width * (heldObjectScale - 1),
+						y + 6 + height * (heldObjectScale - 1), 0, 0, 1, 1, drawColor, 0, 0, 0,
+						-objectRotation, new Vector2f(x + 13, y + 6));
+				break;
+			case 1:
+				r.drawRotatedTexture(x + 30, y + 6, x + 30 + width * (heldObjectScale - 1),
+						y + 6 + height * (heldObjectScale - 1), 0, 0, 1, 1, drawColor, 0, 0, 0,
+						-objectRotation, new Vector2f(x + 30, y + 6));
+				break;
+			case 2:
+				r.drawRotatedTexture(x + 10, y + 10, x + 10 - width * (heldObjectScale - 1),
+						y + 10 + height * (heldObjectScale - 1), 0, 0, 1, 1, drawColor, 0, 0, 0,
+						objectRotation, new Vector2f(x + 10, y + 10));
+
+				break;
+			case 3:
+				r.drawRotatedTexture(x , y + 8, x- width * (heldObjectScale - 1),
+						y + 8 + height * (heldObjectScale - 1), 0, 0, 1, 1, drawColor, 0, 0, 0,
 						objectRotation, new Vector2f(x , y + 8));
 				break;
 			}
@@ -135,7 +164,7 @@ public class Player extends Entity {
 		i.render(r);
 	}
 
-	public void input(Window window, Point mousePos) {
+	public void input(Window window, Point mousePos, int mouseButtons) {
 
 		if (window.isKeyPressed(GLFW_KEY_W)) {
 			if (velY < maxVelocity)
@@ -161,7 +190,7 @@ public class Player extends Entity {
 			direction = 0;
 		}
 
-		i.input(window, mousePos);
+		i.input(window, mousePos, mouseButtons);
 	}
 
 	public void printCoords() {

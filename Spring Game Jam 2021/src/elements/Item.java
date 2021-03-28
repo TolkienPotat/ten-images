@@ -1,5 +1,6 @@
 package elements;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 
 import rendering.Renderer;
@@ -21,9 +22,12 @@ public class Item {
 	
 	public Rectangle rect;
 	
+	
+	
 	public Item(Texture texture) {
 		t = texture;
 		contained = true;
+		rect = new Rectangle();
 	}
 	
 	public Item(Texture texture, int inGameX, int inGameY) {
@@ -37,7 +41,7 @@ public class Item {
 		rect = new Rectangle(inGameX, inGameY, texture.getWidth(), texture.getHeight());
 	}
 	
-	public void tick(Player player) {
+	public int tick(Player player, Point mousePos, int mouseButtons) {
 		
 		if (!contained) {
 			int xDist = player.inGameX - inGameX;
@@ -57,8 +61,15 @@ public class Item {
 			inGameX += xVel;
 			inGameY += yVel;
 			rect.setLocation(inGameX, inGameY);
+		} else {
+
+			if (rect.contains(mousePos) && mouseButtons == 1) {
+				
+				return 1;
+			}
+			
 		}
-		
+		return 0;
 	}
 	
 	public void render(Renderer r, Camera c) {

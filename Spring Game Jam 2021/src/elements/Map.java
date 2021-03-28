@@ -107,7 +107,7 @@ public class Map {
 
 	public void tick(Point mousePos, int mouseButtons, Player player) {
 		tickTiles(mousePos, mouseButtons);
-		tickMapItems(player);
+		tickMapItems(player, mousePos, mouseButtons);
 	}
 	
 	public void render(Camera c, Renderer renderer) { 
@@ -213,8 +213,8 @@ public class Map {
 		particle.tick();
 	}
 	
-	public void tickMapItems(Player player) {
-		mapItems.tick(player);
+	public void tickMapItems(Player player, Point mousePos, int mouseButtons) {
+		mapItems.tick(player, mousePos, mouseButtons);
 		mapItems.addItem(new TreeSeeds(6500, 6500));
 	}
 	

@@ -79,16 +79,16 @@ public class Test implements State {
 		cursor = getCursor(window.id);
 		cursorInGame.setLocation(cursor.x + camera.x, cursor.y + camera.y);
 		
-		player.input(window, cursor);
+		player.input(window, cursor, mouse);
 		
 		
 		
-		if (mouse == 1) {
+		if (mouse != 0) {
 			player.swingObject();
-			player.isSwingingObject = true;
+			player.swingingObject = mouse;
 		} else {
 			player.objectRotation = 0;
-			player.isSwingingObject = false;
+			player.swingingObject = 0;
 		}
 		
 		if (mouse == 2 && map.getObject(cursorInGame.x, cursorInGame.y) == null) {
