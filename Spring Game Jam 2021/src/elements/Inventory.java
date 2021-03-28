@@ -52,11 +52,27 @@ public class Inventory {
 	}
 
 	public void addItem(Item i) {
+
 		i.contained = true;
 		i.xVel = 0;
 		i.yVel = 0;
-		items.add(i);
-		items.get(items.size() - 1).rect.setBounds(p.x + 16 * (items.size() - 1), p.y + 32, 16, 16);
+		
+		
+
+
+		if (!items.isEmpty()) {
+			
+			for (Item item : items) {
+
+				if (item.getClass() == i.getClass()) {
+					item.stack++;
+				} else {
+					continue;
+				}
+			}
+		} else items.add(i);
+    
+    items.get(items.size() - 1).rect.setBounds(p.x + 16 * (items.size() - 1), p.y + 32, 16, 16);
 
 	}
 
@@ -87,6 +103,7 @@ public class Inventory {
 			for (int i = 0; i < items.size(); i++) {
 				Item item = items.get(i);
 
+
 				r.begin();
 
 				GL30.glBindTexture(GL30.GL_TEXTURE_2D, 1);
@@ -99,6 +116,7 @@ public class Inventory {
 							new Color(217, 100, 1), p.inGameX, p.inGameY, 0);
 				}
 				r.end();
+
 
 				r.begin();
 				item.t.bind();
