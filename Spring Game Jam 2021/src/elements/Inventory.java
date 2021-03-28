@@ -39,14 +39,6 @@ public class Inventory {
 	}
 
 	public void init() {
-		//test code
-		addItem ( new Item ( Texture. loadTexture ( "DefaultResources/Images/pLAYER.png" ) ) ) ;
-		addItem ( new Item ( Texture. loadTexture ( "DefaultResources/Images/pLAYER.png" ) ) ) ;
-		addItem ( new Item ( Texture. loadTexture ( "DefaultResources/Images/pLAYER.png" ) ) ) ;
-		addItem ( new Item ( Texture. loadTexture ( "DefaultResources/Images/pLAYER.png" ) ) ) ;
-		addItem ( new Item ( Texture. loadTexture ( "DefaultResources/Images/pLAYER.png" ) ) ) ;
-		addItem ( new Item ( Texture. loadTexture ( "DefaultResources/Images/pLAYER.png" ) ) ) ;
-		addItem ( new Item ( Texture. loadTexture ( "DefaultResources/Images/pLAYER.png" ) ) ) ;
 
 	}
 
@@ -56,7 +48,18 @@ public class Inventory {
 	}
 
 	public void addItem(Item i) {
-		items.add(i);
+		if (!items.isEmpty()) {
+			
+			for (Item item : items) {
+
+				if (item.getClass() == i.getClass()) {
+					item.stack++;
+				} else {
+					items.add(i);
+					break;
+				}
+			}
+		} else items.add(i);
 	}
 
 	public void tick(Player parent) {
@@ -76,7 +79,7 @@ public class Inventory {
 
 			for (int i = 0; i < items.size(); i++) {
 				Item item = items.get(i);
-				
+
 				r.begin();
 				item.t.bind();
 				r.drawTexture(item.t, p.x + (16 * i), p.y + 32, p.inGameX, p.inGameY);
