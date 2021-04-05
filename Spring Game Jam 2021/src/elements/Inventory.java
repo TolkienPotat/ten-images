@@ -61,6 +61,11 @@ public class Inventory {
 			}
 		} else items.add(i);
 	}
+	
+	public Item removeItem(Item i) {
+		items.remove(i);
+		return i;
+	}
 
 	public void tick(Player parent) {
 		p = parent;
